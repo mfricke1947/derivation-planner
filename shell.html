@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Derivation Planner</title>
+<style>
+  html,body{margin:0;height:100%;font-family:system-ui,sans-serif;overflow:hidden}
+  #tabs{display:flex;background:#eee;border-bottom:1px solid #bbb}
+  #tabs button{padding:8px 18px;border:0;background:none;cursor:pointer;font-size:14px}
+  #tabs button.active{background:#fff;font-weight:600;border-bottom:2px solid #36c}
+  iframe{position:absolute;left:0;width:100%;border:0;visibility:hidden;pointer-events:none}
+  iframe.active{visibility:visible;pointer-events:auto}
+  #htmlsrc{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;z-index:10;align-items:center;justify-content:center}
+  #htmlsrc .box{background:#fff;width:80%;height:75%;display:flex;flex-direction:column;padding:12px;border-radius:6px;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+  #htmlsrc textarea{flex:1;font:13px ui-monospace,Menlo,monospace;white-space:pre-wrap;tab-size:2}
+  #htmlsrc .row{display:flex;gap:8px;justify-content:flex-end;margin-top:8px;align-items:center}
+</style></head><body>
+<div id="tabs"></div>
+<div id="htmlsrc"><div class="box"><div style="margin-bottom:6px;font-weight:600">Journal HTML source (active tab)</div><textarea id="htmlsrcText" spellcheck="false"></textarea><div class="row"><span id="htmlsrcNote" style="margin-right:auto;color:#666;font-size:12px"></span><button id="htmlsrcCancel">Cancel</button><button id="htmlsrcApply">Apply</button></div></div></div>
+<script>
+  // Which host pages appear as tabs: set in Preferences (tabProofs / tabTrees / tabInterpretations / tabSymbolize / gamesTab; choosing a
+  // notation suggests them), injected by main.js as window.DeriverPrefs; changing them reloads this page. The Symbolize widget (a bundled older
+  // one, see vendor/symbolize13/README.md) knows only some logical systems, so it is never offered for the others whatever the setting.
+  const P = window.DeriverPrefs || {};
+  const SYMBOLIZE_PARSERS = ['default', 'bergmann', 'copi', 'gentzen', 'hausman', 'herrick'];
+  window.symbolizeSupportedFor = p => SYMBOLIZE_PARSERS.indexOf(p || 'default') >= 0;
+  const PAGES = [];
+  if (P.tabProofs !== false) PAGES.push(['Proofs', 'electron/ProofsDefault.html']);
+  if (P.tabTrees !== false) PAGES.push(['Trees', 'electron/TreesDefault.html']);
+  if (P.tabInterpretations !== false) PAGES.push(['Interpretations', 'electron/InterpretationsDefault.html']);
+  if (P.tabSymbolize !== false && window.symbolizeSupportedFor(P.fParser)) PAGES.push(['Symbolize', 'pages/SymbolizeDefault.html']);
+  if (P.gamesTab) PAGES.push(['Games', 'pages/GamesDefault.html']);
+  if (!PAGES.length) PAGES.push(['Proofs', 'electron/ProofsDefault.html']);     // never an empty window
+  const tabs = document.getElementById('tabs');
+  const frames = [], buttons = [];
+  let active = 0;
+
+  // ---- iframe sizing ----------------------------------------------------
+  // Plain top:/bottom: CSS on the iframes measured far shorter than the window in this app
+  // (never tracked down why — some containing-block quirk), clipping each widget's own lower
+  // controls (e.g. "Start from selection", the symbol palette). Size them from JS instead.
+  function layout(){
+    const top = tabs.getBoundingClientRect().height;
+    frames.forEach(f => { f.style.top = top + 'px'; f.style.height = (window.innerHeight - top) + 'px'; });
+  }
+  window.addEventListener('resize', () => { layout(); fitAllJournals(); });
+
+  // ---- Journal fills the window downwards ---------------------------------------------------
+  // The widgets were made to sit in a small fixed-size box inside a web page, so each builds its Journal at a fixed
+  // 240px. Here every tab has a window of its own, so the Journal is stretched to run to the bottom of the window
+  // (never shorter than JOURNAL_MIN; a shorter window just scrolls). Resize the window to see more or less of it.
+  const JOURNAL_MIN = 140, JOURNAL_GAP = 6;
+  function journalElement(frame){
+    try {
+      const doc = frame.contentDocument;
+      const box = doc && (doc.getElementById('journal') || doc.getElementById('journalDiv'));
+      return box && (box.querySelector('iframe') || box.querySelector('textarea'));   // rich-text frame, or Symbolize's text box
+    } catch (e) { return null; }
+  }
+  function fitJournal(frame){
+    const el = journalElement(frame);
+    if (!el) return;
+    const win = frame.contentWindow;
+    const docTop = el.getBoundingClientRect().top + win.pageYOffset;           // where the Journal starts in the page
+    const h = Math.max(JOURNAL_MIN, Math.floor(win.innerHeight - docTop - JOURNAL_GAP));
+    if (el.__fitted !== h || el.offsetHeight !== h) { el.style.setProperty('height', h + 'px', 'important'); el.__fitted = h; }
+  }
+  function fitAllJournals(){ frames.forEach(fitJournal); }
+  setInterval(() => fitJournal(frames[active]), 700);     // content above the Journal can change height (a growing tree, a message...)
+  window.fitAllJournals = fitAllJournals;
+
+  // ---- shared Journal -----------------------------------------------------
+  // Each widget's Journal is a real widget wired to that tab's own controller — Proofs/Trees/
+  // Interpretations all build it as a GWT RichTextArea (a nested, contentEditable <iframe>) plus
+  // its own symbol-insertion toolbar, both live inside that tab's `#journal` div (a plain
+  // <textarea> only appears in an unused debug code path — checked for too, just in case).
+  // That real widget — toolbar included — can't be shared as one instance across tabs (each tab
+  // is a separate same-origin iframe with its own controller), so instead: leave each tab's own
+  // Journal exactly as the widget built it, and copy its *content* over to the next tab's Journal
+  // at the moment you switch tabs, so it reads as one notebook without touching how any tab looks.
+  // The shared Journal is HTML (the rich-text widgets). The Symbolize widget keeps its Journal in a plain text
+  // box, so content is converted on the way in and out. To avoid flattening the HTML's formatting merely because
+  // you looked at the Symbolize tab, the original HTML is handed back unless the text was actually changed there.
+  function htmlToText(html){
+    const doc = new DOMParser().parseFromString(html, 'text/html');       // inert: nothing in it runs or loads
+    doc.querySelectorAll('style,script,head,title').forEach(e => e.remove());
+    const BLOCK = /^(P|DIV|H[1-6]|BLOCKQUOTE|LI|UL|OL|TABLE|TR|PRE)$/;
+    let out = '';
+    (function walk(n){
+      for (const c of n.childNodes) {
+        if (c.nodeType === 3) out += c.nodeValue.replace(/[\s\u00a0]+/g, ' ');
+        else if (c.nodeType === 1) {
+          if (c.tagName === 'BR') out += '\n';
+          else { const blk = BLOCK.test(c.tagName); if (blk) out += '\n\n'; walk(c); if (blk) out += '\n\n'; }
+        }
+      }
+    })(doc.body);
+    return out.replace(/[ \t]*\n[ \t]*/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+  function textToHtml(text){
+    const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return text.split(/\n{2,}/).filter(p => p.length).map(p => '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>').join('\n');
+  }
+  window.journalConversions = { htmlToText, textToHtml };      // exposed for tests
+
+  function getJournalWidget(frame){
+    try {
+      const doc = frame.contentDocument;
+      const box = doc && (doc.getElementById('journal') || doc.getElementById('journalDiv'));
+      if (!box) return null;
+      const ta = box.querySelector('textarea');
+      if (ta) {                                                  // plain-text Journal (Symbolize)
+        const st = frame.__journalText || (frame.__journalText = { shown: null, html: null });
+        return {
+          get: () => (st.html !== null && ta.value === st.shown) ? st.html : textToHtml(ta.value),
+          set: v => { ta.value = htmlToText(v); st.shown = ta.value; st.html = v; }
+        };
+      }
+      const rta = box.querySelector('iframe');   // the RichTextArea's own nested document
+      if (rta && rta.contentDocument && rta.contentDocument.body)
+        return { get: () => rta.contentDocument.body.innerHTML, set: v => { rta.contentDocument.body.innerHTML = v; } };
+      return null;
+    } catch (e) { return null; }
+  }
+
+  // GWT builds the widget asynchronously, so it may not exist yet right on 'load'; retry until
+  // it shows up (or give up — a start page with no #journal div just doesn't have one).
+  function whenJournalReady(frame, cb, tries){
+    const w = getJournalWidget(frame);
+    if (w) return cb(w);
+    if ((tries || 0) > 100) return;   // ~20s
+    setTimeout(() => whenJournalReady(frame, cb, (tries || 0) + 1), 200);
+  }
+
+  let sharedContent = null;   // last content read from whichever tab's Journal was active
+
+  function show(i){
+    const leaving = getJournalWidget(frames[active]);
+    if (leaving) sharedContent = leaving.get();
+    active = i;
+    frames.forEach((f,j)=>{ f.classList.toggle('active', i===j); buttons[j].classList.toggle('active', i===j); });
+    if (sharedContent != null) whenJournalReady(frames[i], w => w.set(sharedContent));
+    fitJournal(frames[i]);
+  }
+
+  PAGES.forEach(([name,src],i)=>{
+    const b = document.createElement('button'); b.textContent = name; b.onclick = ()=>show(i);
+    tabs.appendChild(b); buttons.push(b);
+    const f = document.createElement('iframe'); f.src = src; document.body.appendChild(f); frames.push(f);
+    // Seed the very first tab's own starting text as the shared content, then apply it to
+    // whichever tab is active by the time this one's Journal is actually ready.
+    whenJournalReady(f, w => { if (sharedContent == null) sharedContent = w.get(); if (i === active) w.set(sharedContent); fitJournal(f); });
+  });
+  layout();
+  show(0);
+
+  // ---- Authoring tools (preference "authorTools"; off for students) ---------------------------------------------
+  // A formatting toolbar for a tab's Journal, placed inside that tab's own page directly above the Journal (below the
+  // symbol palette), since it works on the Journal and not on the proof/tree/drawing above. The Proofs/Trees/Interpretations
+  // Journals are GWT rich-text boxes (an editable nested document), so standard document.execCommand works on them with no
+  // change to the widgets; what is saved in a .lgc file is that Journal's HTML. Symbolize's Journal is plain text and the
+  // Games page has none, so those tabs get no toolbar.
+  function richDoc(frame){
+    try {
+      const box = frame.contentDocument.getElementById('journal');
+      const rta = box && box.querySelector('iframe');
+      return rta && rta.contentDocument && rta.contentDocument.body ? rta : null;
+    } catch (e) { return null; }
+  }
+  function execIn(frame, cmd, arg){
+    const rta = richDoc(frame);
+    if (!rta) return;
+    rta.contentWindow.focus();
+    rta.contentDocument.execCommand(cmd, false, arg);
+  }
+  function addAuthorBar(frame){
+    const rta = richDoc(frame), doc = frame.contentDocument;
+    if (!rta || doc.getElementById('deriverAuthorBar')) return;
+    const st = doc.createElement('style');
+    st.textContent = '#deriverAuthorBar{display:flex;align-items:center;gap:4px;padding:3px 6px;background:#f6f6f6;border:1px solid #ddd;border-width:0 0 1px 0;font:12px Arial,sans-serif}' +
+      '#deriverAuthorBar button,#deriverAuthorBar select{font:12px Arial,sans-serif;padding:1px 6px}#deriverAuthorBar .sep{width:1px;height:16px;background:#ccc;margin:0 3px}';
+    doc.head.appendChild(st);
+    const bar = doc.createElement('div'); bar.id = 'deriverAuthorBar';
+    const mk = (label, title, fn) => { const b = doc.createElement('button'); b.innerHTML = label; b.title = title;
+      b.addEventListener('mousedown', e => e.preventDefault()); b.addEventListener('click', fn); bar.appendChild(b); };
+    const sep = () => { const d = doc.createElement('span'); d.className = 'sep'; bar.appendChild(d); };
+    const sel = doc.createElement('select'); sel.title = 'Paragraph style';
+    [['p', 'Paragraph'], ['h1', 'Heading 1'], ['h2', 'Heading 2'], ['h3', 'Heading 3']].forEach(([v, t]) => { const o = doc.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
+    sel.addEventListener('change', () => execIn(frame, 'formatBlock', '<' + sel.value + '>'));
+    bar.appendChild(sel); sep();
+    mk('<b>B</b>', 'Bold', () => execIn(frame, 'bold')); mk('<i>I</i>', 'Italic', () => execIn(frame, 'italic')); mk('<u>U</u>', 'Underline', () => execIn(frame, 'underline')); sep();
+    mk('&bull; List', 'Bulleted list', () => execIn(frame, 'insertUnorderedList')); mk('1. List', 'Numbered list', () => execIn(frame, 'insertOrderedList')); sep();
+    mk('Undo', 'Undo', () => execIn(frame, 'undo')); mk('Redo', 'Redo', () => execIn(frame, 'redo')); sep();
+    mk('HTML…', 'Show and edit the Journal’s HTML source (Cmd/Ctrl+Shift+H)', () => window.showHtmlSource());
+    rta.parentNode.insertBefore(bar, rta);          // between the symbol palette and the text area
+    fitJournal(frame);
+  }
+  if ((window.DeriverPrefs || {}).authorTools) frames.forEach(f => whenJournalReady(f, () => addAuthorBar(f)));
+
+  // ---- HTML source formatting ----------------------------------------------------------------------------------
+  // The Journal's HTML comes out of the editor as one long line. For the source window it is laid out for editing: every block
+  // element (p, h1-h6, div, ul/ol/li, table...) on its own line, nested blocks indented, a blank line between top-level blocks,
+  // inline content (b, i, span, text...) kept inside its block's line. Apply removes that layout whitespace again, so the
+  // Journal HTML does not accumulate blank text nodes and a no-edit Apply changes nothing.
+  const BLOCK = new Set('address article aside blockquote body dd details div dl dt fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 header hr li main nav ol p pre section table tbody thead tfoot tr td th ul'.split(' '));
+  const VOID = new Set(['hr']);
+  const isBlock = n => n.nodeType === 1 && BLOCK.has(n.tagName.toLowerCase());
+  const hasBlockChild = el => Array.from(el.childNodes).some(isBlock);
+  function prettyHtml(html){
+    const t = document.createElement('template'); t.innerHTML = html;
+    const out = [];
+    (function walk(parent, depth){
+      const pad = '  '.repeat(depth);
+      let run = [];
+      const flush = () => {
+        const s = run.map(n => n.nodeType === 3 ? n.data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/ /g, '&nbsp;') : n.outerHTML).join('').trim();
+        if (s) out.push(pad + s);
+        run = [];
+      };
+      Array.from(parent.childNodes).forEach(n => {
+        if (!isBlock(n)) { run.push(n); return; }
+        flush();
+        if (depth === 0 && out.length && out[out.length - 1] !== '') out.push('');
+        const tag = n.tagName.toLowerCase();
+        if (VOID.has(tag) || tag === 'pre' || !hasBlockChild(n)) { out.push(pad + n.outerHTML); return; }
+        const open = n.cloneNode(false).outerHTML; out.push(pad + open.slice(0, open.length - tag.length - 3));
+        walk(n, depth + 1);
+        out.push(pad + '</' + tag + '>');
+      });
+      flush();
+    })(t.content, 0);
+    return out.join('\n');
+  }
+  function compactHtml(text){
+    const t = document.createElement('template'); t.innerHTML = text;
+    (function strip(parent){
+      Array.from(parent.childNodes).forEach(n => {
+        if (n.nodeType === 3) {
+          // layout whitespace (a newline plus indent) next to a block boundary or the container's edge
+          if (!n.previousSibling || isBlock(n.previousSibling)) n.data = n.data.replace(/^\s*\n\s*/, '');
+          if (!n.nextSibling || isBlock(n.nextSibling)) n.data = n.data.replace(/\s*\n\s*$/, '');
+          if (n.data === '') n.remove();
+        } else if (n.nodeType === 1 && n.tagName.toLowerCase() !== 'pre') strip(n);
+      });
+    })(t.content);
+    return t.innerHTML;
+  }
+  window.prettyHtml = prettyHtml; window.compactHtml = compactHtml;
+
+  // The HTML-source window: edits the active tab's Journal as text. (Plain-text Symbolize Journal: not offered.)
+  const srcBox = document.getElementById('htmlsrc'), srcText = document.getElementById('htmlsrcText'), srcNote = document.getElementById('htmlsrcNote');
+  window.showHtmlSource = function(){
+    const w = getJournalWidget(frames[active]);
+    if (!w || !richDoc(frames[active])) { alert('The HTML source can be edited on the Proofs, Trees and Interpretations tabs.'); return; }
+    srcText.value = prettyHtml(w.get());
+    srcNote.textContent = 'Laid out for editing; Apply replaces the Journal content with this HTML (the layout whitespace is removed again).';
+    srcBox.style.display = 'flex'; srcText.focus();
+  };
+  document.getElementById('htmlsrcCancel').onclick = () => { srcBox.style.display = 'none'; };
+  document.getElementById('htmlsrcApply').onclick = () => {
+    const w = getJournalWidget(frames[active]);
+    if (w) { const html = compactHtml(srcText.value); w.set(html); sharedContent = html; }
+    srcBox.style.display = 'none';
+  };
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') srcBox.style.display = 'none'; });
+
+  // ---- Save/Open bridge (see main.js / lgc.js) ---------------------------
+  // main.js's File > Open/Save reads and writes the active tab's Journal through these two
+  // functions (via executeJavaScript) — same content copy path as switching tabs.
+  window.getActiveJournalHTML = function(){
+    const w = getJournalWidget(frames[active]);
+    return w ? w.get() : '';
+  };
+  window.setActiveJournalHTML = function(html){
+    return new Promise(resolve => {
+      sharedContent = html;
+      whenJournalReady(frames[active], w => { w.set(html); resolve(); });
+    });
+  };
+
+  // ---- Interpretations diagram bridge (see interp.js) ---------------------
+  // The diagram lives in the svg-edit editor iframe (#svgedit) inside the Interpretations tab.
+  // A diagram is a neutral JSON object { individuals, properties, arrows } (interp.js). It is
+  // built here with the widget's *own* shape factories (makeIndividual, relationsMF.makeRelation,
+  // ...) so the SVG follows exactly the conventions the drawing tools produce, then handed to the
+  // widget's augmentSvg(), which also regenerates the Universe/property/relation board.
+  const interpIndex = PAGES.findIndex(p => p[0] === 'Interpretations');
+
+  function editorWindow(){
+    try {
+      const host = frames[interpIndex] && frames[interpIndex].contentWindow;
+      const ed = host && host.document.getElementById('svgedit');
+      const w = ed && ed.contentWindow;
+      return (w && w.svgCanvas && w.gInterpretationBoard && w.augmentSvg && w.makeIndividual && w.propertiesMF) ? w : null;
+    } catch (e) { return null; }
+  }
+  function whenEditorReady(cb, tries){
+    if (interpIndex < 0) return cb(null);                  // no Interpretations tab: nothing to wait for
+    const w = editorWindow();
+    if (w) return cb(w);
+    if ((tries || 0) > 100) return cb(null);
+    setTimeout(() => whenEditorReady(cb, (tries || 0) + 1), 200);
+  }
+
+  // ---- "Write Drawing": the drawing, with its interpretation board, into the Journal --------------------------------
+  // Proofs and Trees have "Write Proof" / "Write Tree"; Interpretations has no equivalent, so the shell adds a button beside "Reset Drawing".
+  // The drawing goes in as ONE picture (an <img> holding the SVG, self-contained: no clashing element ids when several drawings are written,
+  // and it prints), at the Journal's caret, or at its end if the caret is elsewhere. The board (Universe, properties, relations) is part of the
+  // widget's SVG, so it comes with it. (The Java app's own HTML viewer is not expected to show such a picture.)
+  function drawingImageHtml(w){
+    let svg = w.svgCanvas.getSvgString();
+    const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
+    const root = doc.documentElement;
+    if (!root || root.nodeName !== 'svg') return null;
+    const W = parseFloat(root.getAttribute('width')) || 560, H = parseFloat(root.getAttribute('height')) || 400;
+    if (!root.getAttribute('viewBox')) root.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg = new XMLSerializer().serializeToString(root);
+    const b64 = btoa(unescape(encodeURIComponent(svg)));                     // UTF-8 safe base64
+    return '<p><img alt="Interpretation drawing" width="' + W + '" height="' + H + '" style="max-width:100%;height:auto" src="data:image/svg+xml;base64,' + b64 + '"></p>';
+  }
+  window.writeDrawing = function(){
+    const w = editorWindow(), rta = richDoc(frames[interpIndex]);
+    if (!w || !rta) return false;
+    const html = drawingImageHtml(w);
+    if (!html) return false;
+    const d = rta.contentDocument, sel = d.getSelection();
+    // The Journal always holds some caret (position 0 if never clicked), so only trust it when the Journal really has the focus
+    // (the button does not take focus away). The picture goes in a paragraph of its own: after the paragraph holding the caret, else at the end.
+    const caretIsTheUsers = frames[interpIndex].contentDocument.activeElement === rta;
+    rta.contentWindow.focus();
+    let at = d.body.childNodes.length;                                      // body-level position: the end
+    if (caretIsTheUsers && sel.rangeCount && d.body.contains(sel.anchorNode)) {
+      let n = sel.anchorNode;
+      while (n && n.parentNode !== d.body) n = n.parentNode;                // the top-level block holding the caret
+      if (n) at = Array.prototype.indexOf.call(d.body.childNodes, n) + 1;
+    }
+    // Inserted as a DOM node: the editing command `insertHTML` merges a single inserted paragraph into the neighbouring one (at the cost
+    // that the toolbar's Undo does not undo it; the picture can simply be selected and deleted).
+    const holder = d.createElement('div'); holder.innerHTML = html;
+    const p = holder.firstChild;
+    d.body.insertBefore(p, d.body.childNodes[at] || null);
+    const r = d.createRange(); r.setStartAfter(p); r.collapse(true); sel.removeAllRanges(); sel.addRange(r);
+    return true;
+  };
+  (function addWriteDrawingButton(tries){
+    try {
+      const d = frames[interpIndex].contentDocument;
+      const reset = d && Array.from(d.querySelectorAll('button')).find(b => b.textContent === 'Reset Drawing');
+      if (reset) {
+        if (d.getElementById('deriverWriteDrawing')) return;
+        const b = d.createElement('button'); b.id = 'deriverWriteDrawing'; b.type = 'button'; b.className = reset.className; b.textContent = 'Write Drawing';
+        b.title = 'Put the drawing, with its interpretation board, into the Journal';
+        b.addEventListener('mousedown', e => e.preventDefault());              // keep the Journal's caret
+        b.addEventListener('click', () => { if (!window.writeDrawing()) alert('The drawing is not ready yet.'); });
+        reset.parentNode.insertBefore(b, reset.nextSibling);
+        return;
+      }
+    } catch (e) {}
+    if ((tries || 0) < 100) setTimeout(() => addWriteDrawingButton((tries || 0) + 1), 200);
+  })();
+
+  const SKELETON_HEAD = '<svg width="560" height="400" xmlns="http://www.w3.org/2000/svg">' +
+    '<defs><style type="text/css"><![CDATA[text {fill: black;}]]></style></defs><g id="svg_1"><title>Shape</title>';
+  const hex = n => ('0' + Math.max(0, Math.min(255, n)).toString(16)).slice(-2);
+
+  function propertySvg(p){          // same template as propertiesMF.makeProperty, with our size/colour
+    return '<g id="svg_' + p.name + 'g" opacity="0.5"><rect width="' + p.width + '" height="' + p.height +
+      '" id="svg_' + p.name + '" y="' + p.y + '" x="' + p.x + '" fill="#' + p.color.map(hex).join('') +
+      '" stroke="#000000" stroke-width="1" />' +
+      '<text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_' + p.name +
+      't" y="' + (p.y + p.height) + '" x="' + (p.x + p.width / 2) + '" fill="#000000">' + p.name + '</text></g>';
+  }
+
+  function diagramShapes(w, d){
+    const spot = {};
+    d.individuals.forEach(i => { spot[i.name] = { x: i.x, y: i.y }; });
+    let s = '';
+    d.properties.forEach(p => { s += propertySvg(p); });
+    d.individuals.forEach(i => { s += w.makeIndividual(i.name, i.x, i.y); });
+    d.arrows.forEach(a => {
+      const from = spot[a.from], to = spot[a.to];
+      const ns = a.kind === 'function' ? w.functionsMF : a.kind === 'identity' ? w.identitiesMF : w.relationsMF;
+      if (!from || !to || !ns) return;                       // e.g. functions on a page without that extension
+      const circular = a.from === a.to;
+      const make = ns[(a.kind === 'relation' ? 'makeRelation' : a.kind === 'function' ? 'makeFunction' : 'makeIdentity')];
+      const makeCirc = ns.makeCircularRelation || ns.makeCircularFunction;
+      const f = circular && makeCirc && a.kind !== 'identity' ? makeCirc : make;
+      if (f) s += f.call(ns, a.name, from, to);
+    });
+    return s;
+  }
+
+  // Replaces the Interpretations tab's diagram with `d` (an empty diagram just clears it).
+  window.loadDiagram = function(d){
+    return new Promise(resolve => whenEditorReady(w => {
+      if (!w) return resolve(false);
+      w.svgCanvas.setSvgString(SKELETON_HEAD + '<!--start--></g></svg>');
+      w.augmentSvg(diagramShapes(w, d));      // adds the shapes and builds the board from them
+      w.augmentSvg('');                        // second pass: the board now sees the new shapes too
+      // The board's property/relation lines are refreshed by the widget's own 1-second timer
+      // (svgCheck); run it now so the board is right immediately, not up to a second later.
+      w.gInterpretationBoard.svgCheck();
+      w.gInterpretationBoard.svgCheck();
+      // "Reset Drawing" in the widget goes back to the page's `preloadSvg` (what the drawing was at launch). A drawing loaded from
+      // a file is what this document started with, so make that the one Reset returns to (an empty diagram -> empty, as after New).
+      try { frames[interpIndex].contentWindow.preloadSvg = w.svgCanvas.getSvgString(); } catch (e) {}   // a global of the Interpretations PAGE (its loadSvg() reads it)
+      resolve(true);
+    }));
+  };
+
+  // The inverse: reads the current diagram back out of the widget as the same neutral JSON, so it
+  // can be saved in the legacy format. Individuals/properties are read from the SVG (with any
+  // group transforms applied, since dragging a whole group moves it by `transform`); which
+  // individuals each relation/function links is taken from the widget's own derived pairs
+  // (the same ones its board shows), rather than inferred from path geometry.
+  function toRoot(el, x, y){
+    for (let n = el; n && n.nodeType === 1; n = n.parentNode) {
+      const t = n.getAttribute('transform');
+      if (!t) continue;
+      const re = /(matrix|translate|scale)\s*\(([^)]*)\)/g;
+      let m, ops = [];
+      while ((m = re.exec(t))) ops.push([m[1], m[2].split(/[\s,]+/).filter(Boolean).map(Number)]);
+      for (let i = ops.length - 1; i >= 0; i--) {         // rightmost transform applies first
+        const [k, v] = ops[i];
+        if (k === 'translate') { x += v[0]; y += (v[1] || 0); }
+        else if (k === 'scale') { x *= v[0]; y *= (v.length > 1 ? v[1] : v[0]); }
+        else if (k === 'matrix' && v.length === 6) { const nx = v[0]*x + v[2]*y + v[4]; y = v[1]*x + v[3]*y + v[5]; x = nx; }
+      }
+    }
+    return { x: x, y: y };
+  }
+  const rgb = s => {
+    const m = /^#?([0-9a-f]{6})$/i.exec((s || '').trim());
+    return m ? [0, 2, 4].map(i => parseInt(m[1].substr(i, 2), 16)) : [0, 0, 255];
+  };
+  const byName = (a, b) => (a.kind || '').localeCompare(b.kind || '') || a.name.localeCompare(b.name) ||
+    (a.from || '').localeCompare(b.from || '') || (a.to || '').localeCompare(b.to || '');
+
+  window.getDiagram = function(quick){
+    const w = editorWindow();
+    if (!w) return null;
+    const ib = w.gInterpretationBoard;
+    if (!quick) ib.svgCheck();                           // refresh the derived pairs first
+    const doc = new DOMParser().parseFromString(w.svgCanvas.getSvgString(), 'image/svg+xml');
+    const d = { individuals: [], properties: [], arrows: [], skipped: 0 };
+    doc.querySelectorAll('circle').forEach(c => {
+      const m = /^svg_([a-v])$/.exec(c.id || '');
+      if (!m) return;
+      const p = toRoot(c, parseFloat(c.getAttribute('cx')), parseFloat(c.getAttribute('cy')));
+      d.individuals.push({ name: m[1], x: Math.round(p.x), y: Math.round(p.y) });
+    });
+    doc.querySelectorAll('rect').forEach(r => {
+      const m = /^svg_([A-Z])$/.exec(r.id || '');
+      if (!m) return;
+      const x = parseFloat(r.getAttribute('x')), y = parseFloat(r.getAttribute('y'));
+      const a = toRoot(r, x, y), b = toRoot(r, x + parseFloat(r.getAttribute('width')), y + parseFloat(r.getAttribute('height')));
+      d.properties.push({ name: m[1], x: Math.round(Math.min(a.x, b.x)), y: Math.round(Math.min(a.y, b.y)),
+        width: Math.round(Math.abs(b.x - a.x)), height: Math.round(Math.abs(b.y - a.y)), color: rgb(r.getAttribute('fill')) });
+    });
+    const pairs = (str, kind, letters, name) => {
+      for (let i = 0; str && i + 1 < str.length; i += 2) d.arrows.push({ kind: kind, name: name, from: str[i], to: str[i + 1] });
+    };
+    for (let i = 0; i < ib.fPossibleRelations.length; i++) pairs(ib.fCurrentRelations[i], 'relation', null, ib.fPossibleRelations[i]);
+    for (let i = 0; i < ib.fPossibleFunctions.length; i++) pairs(ib.fCurrentFunctions[i], 'function', null, ib.fPossibleFunctions[i]);
+    for (let i = 0; i < ib.fPossibleIdentities.length; i++) {
+      const target = ib.fCurrentIdentities[i];
+      if (!target || target === ' ') continue;
+      // an identity arrow's start is not part of its meaning (alias = target); take the nearest individual
+      const path = doc.getElementById('svg_identity' + ib.fPossibleIdentities[i]);
+      let from = target;
+      const m = path && /^m\s*(-?[\d.]+)[\s,]+(-?[\d.]+)/i.exec(path.getAttribute('d') || '');
+      if (m) {
+        let best = 1e9;
+        d.individuals.forEach(ind => { const dd = Math.hypot(ind.x - m[1], ind.y - m[2]); if (dd < best) { best = dd; from = ind.name; } });
+      }
+      d.arrows.push({ kind: 'identity', name: ib.fPossibleIdentities[i], from: from, to: target });
+    }
+    d.individuals.sort(byName); d.properties.sort(byName); d.arrows.sort(byName);
+    return d;
+  };
+
+  // ---- Proofs bridge (see proofstate.js, TProofState.java) ------------------------------------
+  // The Proofs widget exports window.deriverProof.get()/set(json) on its page's window.
+  // A proof is { head:[line...], tail:[line...] } of parse-tree formulas (notation-independent).
+  const proofIndex = PAGES.findIndex(p => p[0] === 'Proofs');
+  function proofApi(){
+    try { const a = frames[proofIndex] && frames[proofIndex].contentWindow.deriverProof; return a && a.get && a.set ? a : null; }
+    catch (e) { return null; }
+  }
+  function whenProofReady(cb, tries){
+    if (proofIndex < 0) return cb(null);                   // no Proofs tab
+    const a = proofApi();
+    if (a) return cb(a);
+    if ((tries || 0) > 25) return cb(null);    // ~5s: an older widget build without the API
+    setTimeout(() => whenProofReady(cb, (tries || 0) + 1), 200);
+  }
+  let blankProofJson = null;      // the widget's own empty starting proof, captured once it is up
+  whenProofReady(a => { if (a && blankProofJson === null) blankProofJson = a.get(); });
+
+  // Derive off: the web widget has no setting for it (its Wizard menu is built in, and `fDerive` is not consulted), so the Wizard item of the
+  // Proofs menu bar is hidden from here. The Stegeman proof panel has no Wizard menu anyway.
+  if (P.fDerive === false && proofIndex >= 0) {
+    setInterval(() => {
+      try {
+        Array.from(frames[proofIndex].contentDocument.querySelectorAll('.gwt-MenuItem')).forEach(i => {
+          if (i.textContent.trim() === 'Wizard' && i.style.display !== 'none') i.style.display = 'none';
+        });
+      } catch (e) {}
+    }, 500);
+  }
+
+  window.getProof = function(){
+    const a = proofApi();
+    if (!a) return null;
+    const p = JSON.parse(a.get());
+    return { head: p.head, tail: p.tail };
+  };
+  // p = a proof, or null to go back to the empty starting proof
+  window.setProof = function(p){
+    return new Promise(resolve => whenProofReady(a => {
+      if (!a) return resolve(false);
+      if (p) return resolve(a.set(JSON.stringify(p)));
+      resolve(blankProofJson ? a.set(blankProofJson) : false);
+    }));
+  };
+
+  // ---- Trees bridge (see treestate.js, TTreeState.java) ------------------------------------------
+  // The Trees widget exports window.deriverTree.get()/set(json). A tree is { root: node } (see treestate.js);
+  // { root: null } means no tree has been started.
+  const treeIndex = PAGES.findIndex(p => p[0] === 'Trees');
+  function treeApi(){
+    try { const a = frames[treeIndex] && frames[treeIndex].contentWindow.deriverTree; return a && a.get && a.set ? a : null; }
+    catch (e) { return null; }
+  }
+  function whenTreeReady(cb, tries){
+    if (treeIndex < 0) return cb(null);                    // no Trees tab
+    const a = treeApi();
+    if (a) return cb(a);
+    if ((tries || 0) > 25) return cb(null);    // ~5s: an older widget build without the API
+    setTimeout(() => whenTreeReady(cb, (tries || 0) + 1), 200);
+  }
+  window.getTree = function(){
+    const a = treeApi();
+    return a ? JSON.parse(a.get()) : null;
+  };
+  // t = { root: node } or { root: null } to reset to an empty tree
+  window.setTree = function(t){
+    return new Promise(resolve => whenTreeReady(a => resolve(a ? a.set(JSON.stringify(t)) : false)));
+  };
+
+  // The symbols of the palette the Proofs tab shows (it builds them from the chosen logical system), so other
+  // pages — the Symbolize tab — can offer exactly the same palette. [] until the Proofs tab has built it.
+  window.getPaletteSymbols = function(){
+    try {
+      const d = frames[proofIndex].contentDocument;
+      return Array.from(d.querySelectorAll('#journal .html-face')).map(e => e.textContent).filter(Boolean);
+    } catch (e) { return []; }
+  };
+
+  // true once every enabled tab's widget has started (used before opening a file handed to the app at launch)
+  window.widgetsReady = function(){
+    return (proofIndex < 0 || !!proofApi()) && (treeIndex < 0 || !!treeApi()) && (interpIndex < 0 || !!editorWindow());
+  };
+  window.hasTab = function(name){ return PAGES.some(p => p[0] === name); };
+
+  window.showTab = function(name){
+    const i = PAGES.findIndex(p => p[0] === name);
+    if (i >= 0 && i !== active) show(i);
+  };
+</script></body></html>

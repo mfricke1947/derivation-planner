@@ -1,0 +1,24 @@
+/* Look of the Symbolize tab: matches the Proofs/Trees/Interpretations tabs (GWT "Standard" theme, which the bundled
+   widget also loads by itself: buttons, palette bar). The widget's own website stylesheet (vendor/.../Symbolize13.css,
+   fixed-size grey boxes and giant buttons) is deliberately NOT used. Measured from the Proofs tab: body 13px Arial,
+   page margin 5px, Journal 240px tall in Times 16px on white. */
+html body { margin: 0; background: #fff; color: #000; }
+#container { margin-left: 5px; margin-right: 5px; }
+
+/* the three buttons sit side by side, like "Start from selection / Write Proof" */
+#buttonsDiv { margin: 8px 0 0 0; }
+#buttonsDiv > div { display: inline-block; vertical-align: top; }
+
+/* symbol palette bar: the same classes the other tabs' palette uses (styled by the theme) */
+#palette.gwt-RichTextToolbar { margin: 0; min-height: 26px; }   /* directly under the buttons, as on the other tabs */
+#palette .gwt-PushButton-up, #palette .gwt-PushButton-up-hovering { display: inline-block; vertical-align: top; }
+#palette .html-face { padding: 0 4px; min-width: 8px; text-align: center; line-height: 17px; user-select: none; cursor: pointer; }
+
+/* the Journal: a rich-text box (iframe with an editable document), clear white, like the other tabs' Journal */
+#journal { margin: 0; }
+#journal iframe { display: block; width: 100%; box-sizing: border-box; height: 240px; margin: 0; border: 0; background: #fff; }   /* height: runs to the window bottom (shell.html fitJournal) */
+/* the widget's own plain text box: still there (the widget needs it) but kept out of sight; see the script in SymbolizeDefault.html */
+#journalDiv { position: absolute; left: -10000px; top: 0; width: 600px; height: 60px; overflow: hidden; }
+#journalDiv textarea { width: 600px; height: 60px; }
+.errorLabel { color: red; }
+#errorLabelDiv { display: inline-block; vertical-align: middle; margin: 0 0 0 10px; }     /* beside the buttons, so nothing sits below the Journal */

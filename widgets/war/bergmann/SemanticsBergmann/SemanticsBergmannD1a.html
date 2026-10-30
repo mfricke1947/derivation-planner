@@ -1,0 +1,133 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="../Interpretations.css">
+
+    <title>Semantics Gentzen D1a</title>
+
+  
+  
+  <!-----------          SVG using embedapi   ----------  -->
+  <!----------- run SVG first to get a target for svgCanvas   ----------  -->
+  
+<script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapi.js"></script>
+<script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapiMF.js"></script>
+  
+<script type="text/javascript">
+	var preloadSvg = '<svg width="560" height="400" xmlns="http://www.w3.org/2000/svg"> (SemanticsGentzenTest2.html, line 83)'+
+' <g id="svg_1">'+
+'  <title>Shape</title>'+
+'  <g id="svg_IBg">'+
+'   <rect fill="none" stroke="black" x="0" y="0" id="svg_IB" width="140" height="80"/>'+
+'   <text fill="#000000" x="70" y="18" id="svg_line1" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">Universe={a,c}</text>'+
+'   <text fill="#000000" x="70" y="36" id="svg_line1" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">H={a,c}</text>'+
+'   <text fill="#000000" x="70" y="54" id="svg_line1" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">P={a}</text>'+
+'   <text fill="#000000" x="70" y="72" id="svg_line2" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">b={a}</text>'+
+'  </g>'+
+'  <!--start-->'+
+'  <g id="svg_ag">'+
+'   <circle r="11" id="svg_a" cy="204" cx="105" stroke="black" fill="none"/>'+
+'   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_at" y="211" x="105" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">a</text>'+
+'  </g>'+
+'  <g id="svg_cg">'+
+'   <circle fill="none" stroke="black" cx="242" cy="244" id="svg_c" r="11"/>'+
+'   <text fill="#000000" x="242" y="251" id="svg_ct" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">c</text>'+
+'  </g>'+
+'  <g id="svg_Pg">'+
+'   <rect stroke-opacity="0.5" stroke="#000000" fill-opacity="0.5" fill="#007fff" x="47" y="173" id="svg_P" height="100" width="100"/>'+
+'   <text fill="#007fff" x="97" y="273" id="svg_Pt" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">P</text>'+
+'  </g>'+
+'  <g id="svg_Hg">'+
+'   <rect width="170" height="89.52381" id="svg_H" y="188" x="91" fill="#FF0000" fill-opacity="0.5" stroke-opacity="0.5" stroke="#000000"/>'+
+'   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_Ht" y="288" x="141" fill="#000000" transform="matrix(1.7 0 0 0.895238 -63.7 19.6952)">H</text>'+
+'  </g>'+
+'  <defs>'+
+'   <marker id="Triangle" viewBox="0 0 20 20" refX="0" refY="10" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto">'+
+'    <path d="m0,0l20,10l-20,10l0,-20z" id="svg_2"/>'+
+'   </marker>'+
+'   <marker id="Functionb" viewBox="0 0 80 80" refX="0" refY="0" markerUnits="strokeWidth" markerWidth="80" markerHeight="80">'+
+'    <text font-size="14" y="14" x="0" id="svg_3">b</text>'+
+'   </marker>'+
+'  </defs>'+
+'  <path stroke="black" d="m203,95l-53,50.5l-53,50.5" id="svg_identityb" marker-end="url(#Triangle)" marker-mid="url(#Functionb)" fill="none"/>'+
+' </g>'+
+'</svg>';
+</script>
+ 
+<!--       ---------          end of SVG          ----------  -->
+  
+<script type="text/javascript" language="javascript" src="../interpretations/interpretations.nocache.js"></script>
+
+  </head>
+
+
+  <body>
+
+    <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+    
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <script type="text/javascript" language="javascript">
+   var Parameters = {
+ 
+  fParser: "bergmann",
+  fAdvancedMenu: "true",
+  fIdentity: "true",
+  fInputText: "<p>"+
+"Which of the following formulas are true in the Interpretation? (You can "+
+"check by selecting them and clicking <em>True?</em>)"+
+"</p>"+
+"<blockquote>"+
+"<p>a) a=b </p>"+
+"<p>b) a=c</p>"+
+"<p>c) Pa</p>"+
+"<p>d) Hb</p>"+
+"<p>e) (∃x)(Px∧Hx)</p>"+
+"<p>f) (∃x)((Px∧Hx) ∧ (∀y)((Py∧Hy)⊃ y=x)) </p>"+
+"<p>g) (∃x)(∃y)((Px∧Hx)∧(Py∧Hy)∧∼(x=y))</p>"+
+"<p>h)  (∃x)(∃y)((Hx∧Hy)∧∼(x=y)∧(∀z)(Hz⊃( (z=x) ∨(z=y))))</p>"+
+"</blockquote>",
+};
+  </script>
+
+<div id="container">
+
+<iframe src="../svg-edit-2.6-hackCopy/svgEditorMFAdvanced.html" width="640px" height="540px" id="svgedit" 
+onload="startSvg()"></iframe>    
+
+<div id="menu"> </div>
+
+<div id="menubuttons"> </div>
+
+<div id="editbuttons"> </div>
+
+<div id="input"> </div>
+
+<div id="proof"> </div>
+
+<div id="startButton" ></div> 
+
+<div id="journal" ></div>
+
+<div id="buttons"></div>  
+  
+ </div>
+ 
+ 
+  </body>
+</html>
+
+
+
+  
+ 

@@ -1,0 +1,100 @@
+{
+  "name": "deriver-electron",
+  "productName": "Derivation Planner",
+  "version": "1.0.0",
+  "description": "Derivation Planner (Deriver): logic teaching tools as a desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "stage": "node tools/stage-war.js",
+    "dist:mac": "node tools/stage-war.js && electron-builder --mac",
+    "dist:win": "node tools/stage-war.js && electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.15.3"
+  },
+  "author": {
+    "name": "Martin Frické",
+    "email": "mfricke@arizona.edu"
+  },
+  "build": {
+    "appId": "us.softoption.derivationplanner",
+    "productName": "Derivation Planner",
+    "files": [
+      "main.js",
+      "prefs.js",
+      "preload.js",
+      "lgc.js",
+      "beans.js",
+      "interp.js",
+      "proofstate.js",
+      "treestate.js",
+      "htmldoc.js",
+      "placement-preview.js",
+      "shell.html",
+      "preferences.html",
+      "pages/**",
+      "vendor/**",
+      "package.json",
+      "icons/icon.icns"
+    ],
+    "extraResources": [
+      {
+        "from": "build/war",
+        "to": "war"
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "identity": "Martin Fricke (Q9HLGT4UZZ)",
+      "icon": "icons/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "notarize": false
+    },
+    "fileAssociations": [
+      {
+        "ext": "lgc",
+        "name": "Derivation Planner document",
+        "role": "Editor",
+        "icon": "icons/doc.icns"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icons/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    },
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mfricke1947/derivation-planner.git"
+  },
+  "homepage": "https://softoption.us/node/887"
+}

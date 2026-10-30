@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <link type="text/css" rel="stylesheet" href="../TreesJS.css">
+    <title>Tutorial 5</title>
+    <script type="text/javascript" language="javascript" src="../treesjs/treesjs.nocache.js"></script>
+  </head>
+  <body> <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabindex="-1" style="position:absolute;width:0;height:0;border:0"></iframe>
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+    <script type="text/javascript" language="javascript">
+   var Parameters = {
+ 
+  fParser: "barwise",
+  
+  tree0: value="∀xCube(x)→∃ySmall(y),  ¬∃ySmall(y),  ∴ ¬∀xCube(x)",
+  tree1: value="∴ ∃w(Dodec(w)∧Large(w)) ≡ (∃wDodec(w)∧∃wLarge(w))",
+  tree2: value="∀x∀y(LeftOf(x,y)→Larger(x,y)),∀x(Cube(x)→Small(x)),∀x(Tet(x)→Large(x)),∀x∀y((Small(x)∧Small(y))→¬Larger(x,y))∴ ¬∃x∃y(Cube(x)∧Cube(y)∧ RightOf(x,y))",
+ 
+};
+  </script>
+    <div id="container">
+      <h3>Trees</h3>
+      <div id="menu"> </div>
+      <div id="menubuttons"> </div>
+      <div id="input"> </div>
+      <div id="tree"> </div>
+      <div id="journal"></div>
+      <div id="startButton"></div>
+      <div id="buttons"></div>
+    </div>
+  </body>
+</html>

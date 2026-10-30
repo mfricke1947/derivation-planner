@@ -1,0 +1,113 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the     -->
+<!-- browser's rendering engine into                -->
+<!-- "Standards Mode". Replacing this declaration   -->
+<!-- with a "Quirks Mode" doctype is not supported. -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <!--                                                               -->
+    <!-- Consider inlining CSS to reduce the number of requested files -->
+    <!--                                                               -->
+    <link type="text/css" rel="stylesheet" href="../Proofs.css">
+    <link type="text/css" rel="stylesheet" href="../proofs/gwt/standard/standard.css">
+
+    <!--                                           -->
+    <!-- Any title is fine                         -->
+    <!--                                           -->
+    <title>Testing the PLI Rules</title>
+    
+    <!--                                           -->
+    <!-- This script loads your compiled module.   -->
+    <!-- If you add any GWT meta tags, they must   -->
+    <!-- be added before this line.                -->
+    <!--                                           -->
+    <script type="text/javascript" language="javascript" src="../proofs/proofs.nocache.js"></script>
+  </head>
+
+  <!--                                           -->
+  <!-- The body can have arbitrary html, or      -->
+  <!-- you can leave the body empty if you want  -->
+  <!-- to create a completely dynamic UI.        -->
+  <!--                                           -->
+  <body>
+
+    <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+    
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <script type="text/javascript" language="javascript">
+   var Parameters = {
+ 
+  fParser: "stegeman",
+  fPropLevel: "true",
+  
+  fInputText: "<p>P, P ⊃ Q ∴ Q &nbsp; ~Q, P ⊃ Q ∴ ~P <span style=\"margin-left: 248px;\">/*MP and MT √ */</span><p>"+
+          "<p> ~P, P ∨ Q ∴ Q &nbsp; ~Q, P ∨ Q ∴ P &nbsp; ~P, P ⊕ Q ∴ Q &nbsp; ~Q, P ⊕ Q ∴ P<span style=\"margin-left: 44px;\">/*DS √ */</span>   </p>"+
+
+          "<p> P, P ⊕ Q ∴ ~Q &nbsp; Q, P ⊕ Q ∴ ~P<span style=\"margin-left: 246px;\">/*Exc √ */</span>   </p>"+
+          "<p>P ∴  P ∨ Q  <span style=\"margin-left: 380px;\">/*Add √ */</span></p>"+
+
+          "<p>P,Q ∴ P.Q &nbsp; P,Q ∴ Q.P <span style=\"margin-left: 302px;\">/*Conj √ */</span></p>"+
+          "<p>P.Q ∴ P &nbsp; P.Q ∴ Q <span style=\"margin-left: 326px;\">/*Simp √ */</span></p>"+
+
+          "<p>P⊃ Q, Q ⊃R ∴ P⊃ R &nbsp; P≡ Q, Q ≡R ∴ P≡ R <span style=\"margin-left: 172px;\">/*Tran √ */</span></p>" +
+          "<p>P ∨ Q, ~P ∨ R ∴  Q∨ R &nbsp; P⊕ Q, ~P ⊕R ∴ Q⊕ R <span style=\"margin-left: 146px;\">/*Res  √  */</span</p>" +
+          "<p>P∨R,(P⊃Q).(R⊃S) ∴ Q∨S <span style=\"margin-left: 276px;\">/*TD  √ */<span></p>"+
+            "<p>~Q∨~S,(P⊃Q).(R⊃S) ∴ ~P∨~R <span style=\"margin-left: 243px;\">/*TD  √ */<span></p>"+
+          "<p>P⊃Q ∴ ∼P ⊃ (Q∨∼Q)  <span style=\"margin-left: 305px;\">/*TA  √ */</span></p>"
+          ,
+ 
+};
+  </script>
+
+<div id="container">
+<h6>7/3/26</h6>
+<p>
+Type, or paste, premises into the <b>lower panel</b>. If there are several, separate them by commas, then, if there is a conclusion a 'therefore' symbol ∴ followed by that conclusion.e.g. copy all this <p>P, P ⊃ Q ∴ Q </p>
+and paste it in. Then Select whatever you wish in the lower panel and press 'Start from Selection'.
+<br>
+In the proof, the upper panel, select a single line by clicking on it, or multiple lines by cmd-clicking on several lines.
+<br>
+Choose a suitable rule off the Rules Menu to add a line.
+<p>
+  To use the PME Rules, Select a line, Select 'Rewrite Rules' from the Rules Menu.
+</p>
+<blockquote>/* The character for 'or' needs to be html 'or' which is &#or; Type it, or other logical symbols, from the symbol palette.*/
+</blockquote>
+<hr>
+</p>
+
+<div id="menu"> </div>
+
+<div id="menubuttons"> </div>
+
+<div id="editbuttons"> </div>
+
+<div id="input">
+  
+
+</div>
+
+<div id="proof"> </div>
+
+<div id="startButton" ></div> 
+<hr>
+<div id="journal" ></div>
+
+<div id="buttons"></div>  
+  
+ </div>
+ 
+ 
+  </body>
+</html>

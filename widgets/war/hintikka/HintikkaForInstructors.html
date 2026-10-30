@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the     -->
+<!-- browser's rendering engine into                -->
+<!-- "Standards Mode". Replacing this declaration   -->
+<!-- with a "Quirks Mode" doctype is not supported. -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="../Interpretations.css">
+    <link type="text/css" rel="stylesheet" href="../interpretations/gwt/standard/standard.css">
+
+    <title>Interpretations</title>
+
+
+
+  <!-----------          SVG using embedapi   ----------  -->
+  <!----------- run SVG first to get a target for svgCanvas   ----------  -->
+
+<script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapi.js"></script>
+
+<script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapiMF.js"></script>
+
+<script type="text/javascript">
+	var preloadSvg = '<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg"> <g id="svg_1"> <title>Layer 1</title> <g id="svg_IBg"> <rect fill="none" stroke="black" x="0" y="0" id="svg_IB" width="140" height="60"/> <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="70" y="18" id="svg_line1" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">Universe={a,b}</text> <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="70" y="36" id="svg_line1" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">F={a}</text> <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="70" y="54" id="svg_line1" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">G={b}</text> </g> <!--start--> <g id="svg_ag"> <circle r="11" id="svg_a" cy="204" cx="105" stroke="black" fill="none"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_at" y="211" x="105" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">a</text> </g> <g id="svg_bg"> <circle r="11" id="svg_b" cy="182" cx="274" stroke="black" fill="none"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_bt" y="189" x="274" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">b</text> </g> <g opacity="0.5" id="svg_Fg"> <rect width="100" height="100" id="svg_F" y="155" x="63" fill="#FF0000" fill-opacity="null" stroke="#000000" stroke-opacity="null" stroke-width="5"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_Ft" y="255" x="113" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">F</text> </g> <g opacity="0.5" id="svg_Gg"> <rect width="100" height="100" id="svg_G" y="132" x="233" fill="#FF0000" fill-opacity="null" stroke="#000000" stroke-opacity="null" stroke-width="5"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_Gt" y="232" x="283" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">G</text> </g> </g> </svg>';
+</script>
+
+<!--       ---------          end of SVG          ----------  -->
+
+<script type="text/javascript" language="javascript" src="../interpretations/interpretations.nocache.js"></script>
+
+
+
+  </head>
+
+
+  <body>
+
+    <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <script type="text/javascript" language="javascript">
+   var Parameters = {
+
+  fParser: "gentzen", <!-- default-->
+  fIdentity: "true",
+  fAdvancedMenu: "true",
+  fInputText: "<p> a) F(a) <br> <br>b) G(a) <br><br>c) F(b) <br><br> d) G(b) ∨ F(b) <br><br> e) F(a)≡G(b) <br><br> f) G(a)&F(b) <br><br> g) F(b)→G(b) <br><br> h) G(c) <br><br> i) H(a) <br><br>  j) ∀xF(x) <br><br>  k) ∀x(F(x)& ∃yG(y))  <br><br>  l) ∀x∃y(F(x) ∨ G(y)) </p>",
+
+};
+  </script>
+
+<div id="container">
+
+<h3>Interpretations</h3>
+
+    <button onclick="exportPreloadSvg();">Get preloadSvg</button>
+    <br/>
+
+ <!-- Draw a diagram above, then click "Get preloadSvg" -- it fills the box below with a
+      ready-to-paste  var preloadSvg = '...';  line (quotes already escaped, one line, matching
+      every exercise page's own style) and selects it, so the next step is just Cmd+C/Ctrl+C,
+      then paste straight into a new exercise HTML file's <script> block.
+
+ mf 8/30/26, updated 2026-09-05 -->
+
+ <textarea id="preloadSvgOutput" readonly rows="6" style="width:95%;font-family:monospace;font-size:12px;display:block;margin-top:8px;"
+     placeholder="Click &quot;Get preloadSvg&quot; after drawing, then Cmd+C/Ctrl+C to copy (the text is auto-selected for you)."></textarea>
+
+ <script type="text/javascript">
+ function exportPreloadSvg(){
+     svgCanvas.getSvgString()(function(data, error){
+         var box = document.getElementById('preloadSvgOutput');
+         if (error){
+             box.value = 'Error getting SVG: ' + error;
+             return;
+         }
+         var escaped = data
+             .replace(/\\/g, '\\\\')   // backslashes first, so this doesn't double-escape the quote-escaping below
+             .replace(/'/g, "\\'")     // single quotes, since preloadSvg is a single-quoted JS string
+             .replace(/\r?\n/g, '');   // keep it one line, matching every existing exercise page
+         box.value = "var preloadSvg = '" + escaped + "';";
+         box.focus();
+         box.select();
+     });
+ }
+ </script>
+
+
+<!-- <iframe src="../svg-edit-2.6-hackCopy/svgEditorMF.html" width="900px" height="600px" id="svgedit"
+onload="startSvg()"></iframe> no functions palette, the Advanced one has functions-->
+
+<iframe src="../svg-edit-2.6-hackCopy/svgEditorMFAdvanced.html" width="640px" height="540px" id="svgedit" 
+onload="startSvg()"></iframe>    
+
+
+<div id="menu"> </div>
+
+<div id="menubuttons"> </div>
+
+<div id="editbuttons"> </div>
+
+<div id="input"> </div>
+
+<div id="proof"> </div>
+
+<div id="startButton" ></div>
+
+<div id="journal" ></div>
+
+<div id="buttons"></div>
+
+ </div>
+
+
+  </body>
+</html>

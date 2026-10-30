@@ -1,0 +1,229 @@
+<h6 class="text-align-right">
+    7/19/2026
+</h6>
+<h2>
+    <em>Under construction</em>
+</h2>
+<img src="/sites/default/files/images/CheerpJ_16x9_Trans.png" data-align="left" alt="" width="30%" height="30%">
+<p>
+    &nbsp;
+</p>
+<p>
+    &nbsp;
+</p>
+<p>
+    Many thanks to Leaning Technologies for providing <a href="https://cheerpj.com" target="_blank">CheerpJ</a> and allowing its use for this purpose.
+</p>
+<p style="margin-left:20px;">
+    <a href="/test/cheerpj2/index.html" target="_blank">CheerpJ Deriver20FatV15 Test</a>&nbsp;The Java .jar, the app, that CheerpJ is running here is <strong>Deriver20FatV15.jar</strong>.&nbsp;
+</p>
+<p>
+    [For various technical reasons it is quicker and easier at this point to provide the running app as a page on its own outside the SoftOption host environment.]
+</p>
+<p>
+    The configuration here is that of an 'app' running inside a web browser. That poses two immediate problems. Web browsers are set up to be 'sand-boxed' or 'firewalled' from the computers they are running on. This is a prudent precaution, as Users may open web pages from anywhere. The first problem is with the clipboard. In a manner of speaking, there are two clipboards. There is a system clipboard that the User employs cutting and pasting etc. on their machine, and there is Deriver's clipboard that the User employs cutting and pasting etc. when doing logic. Care us needed with how these interact. The second problem is with the file system. Users may want to save their Deriver-app work to their computer. They may also want to open saved work, or acquired files, from their computer into Deriver. Care is also needed with this as it too seems to breach the sandbox.
+</p>
+<h3>
+    An important note about the Clipboard and System Clipboard
+</h3>
+<p>
+    <em><strong>Executive Summary of the Present Practice</strong></em>: Deriver has four panels: a web-page journal, a logic proof panel, a logic tree panel, and a logic interpretation panel. The latter three panels have their own Editing and have little or no use for any editing transfers to or from external sources. (Those three panels do have some transfer to the 'outside'— in that, they can be saved, printed, etc.) That leaves the web-page journal (or journals since it is possible for several of them to be open at once). These have Edit Menus with Cut, Copy, Paste, Undo etc. These Menus all work 'internally' that is Cutting, Pasting etc. among themselves using Menu Commands (i.e. mouse clicks on menu items). Suitable material from 'outside', say from WORD, can be pasted in using the keyboard equivalent for Paste (e.g. command-V on a Mac). In sum, use the mouse and edit menus within Deriver and keyboard equivalents when bridging from inside to outside or vv.
+</p>
+<!--
+<p leftmargin="20px">
+                                        A running evaluation copy of CheerpJ occasionally will display a new page with license information:
+</p>
+<img src="/sites/default/files/images/Licensing.jpg" data-align="center" data-entity-uuid="9201c47b-eba8-4e69-8c85-1bb519470e11" data-entity-type="file" alt="" width="40%" height="40%">
+<p>
+                                        This is a 'nudge' from CheerpJ to encourage the User to obtain a license. We will be doing exactly that on successful evaluation of Deriver in this setting.
+</p>
+-->
+<h3>
+    An important note about the File System
+</h3>
+<p>
+    The non-CheerpJ Deriver20.jar, running in Java from a terminal saves to portable and visible files on a resource such as a disk. It also opens such files. The plain vanilla CheerpJ hosted version saves to a virtual file system which, roughly speaking, is the web browser such as Chrome, Brave, Safari, etc. This type of saving is not portable or visible. So, for example, with it an Instructor might have difficulty in conveying saved exercises to students (or students submitting exams to an examiner). This is not a criticism of what CheerpJ hosting does in the wider case. But it does mean that probably some extra glue code is needed to allow the hosted version with a web browser to talk to the world at large.
+</p>
+<p>
+    <em><span style="background-color:rgb(0, 255, 255);">The solution being tried here, nothing to do with CheerpJ itself, is to have a 'File Bar' on the web page as an intermediate step. &nbsp;Users can upload and download files from their computers to the File Bar. Then the File Bar can upload and download files to and from the virtual file system that Deriver is using when running in CheerpJ.</span></em>
+</p>
+<p>
+    <img src="/sites/default/files/images/CheerpJDeriverHomescreen.jpg" data-entity-uuid="5a2ad044-77c4-45ce-8d40-e4be357bf9c3" data-entity-type="file" alt="" width="80%" height="80%">
+</p>
+<h3>
+    &nbsp;
+</h3>
+<p>
+    Work is ongoing here (Claude may have a role to play).
+</p>
+<p>
+    &nbsp;
+</p>
+<hr>
+<p>
+    &nbsp;
+</p>
+<p>
+    A sketch of what Deriver is capable of is available from:
+</p>
+<p style="margin-left:40px;">
+    <a href="/node/653" target="_blank"><em><span margin-left:40px;"="">Fast Start on the Deriver web or standalone Application (for Instructors)</span></em></a><em><span margin-left:40px;"="">&nbsp;&nbsp;</span></em>
+</p>
+<p>
+    <p"><em>Considering the CheerpJ Hosted, <b>loader 4.3 version 6/24/26</b> ...</em></p">
+</p>
+<p>
+    &nbsp;
+</p>
+<blockquote>
+    <h3>
+        File menu
+    </h3>
+    <img src="/sites/default/files/images/FileMenu.jpg" data-entity-uuid="edf4fc9c-8eb4-4300-b7a2-995350fb6338" data-entity-type="file" alt="" width="25%" height="25%">
+    <p>
+        <span >As mentioned, Saving or Opening Files has an intermediate step. There is a 'File Bar' across the top of the window. It displays the files that Deriver can see from its menus, and which can be opened by Open File. When Deriver Saves a file, that file will appear in the File Bar. Importing should be followed by clicking the Send to Deriver Button. Files can also be added to the File Bar from the User's computer or elsewhere by means of an 'Import' button. Clicking on any of the files displayed in the File Bar will download the relevant file to the User's computer or elsewhere.</span>
+    </p>
+    <p>
+        <strong>New File</strong> produces a new journal, proof, tree and interpretation within the existing browser. If there is an old document there, which has not been <strong>Saved</strong>, the User is prompted to <strong>Save</strong> it. <span >Good.</span>
+    </p>
+    <p>
+        <strong>Open Logic</strong> file opens an existing logic document, of four panels, within the present browser. If there is an old document already on display there, which has not been <strong>Saved</strong>, the User is prompted to <strong>Save</strong> it. <span >Good.</span>
+    </p>
+    <p>
+        <strong>Open Web Page</strong> can open many types of document into the Journal only. It can open from files or from urls. Typically the documents will be Web Pages. If there is existing content already on display there, which has not been <strong>Saved</strong>, the User is prompted to <strong>Save</strong> it. <span >Good from files or urls.</span>
+    </p>
+    <p>
+        <strong>Close Browser</strong> closes the foremost browser. If there is a document already on display there, which has not been <strong>Saved</strong>, the User is prompted to <strong>Save</strong> it. If the browser is the only or last browser on display, the application as a whole will exit. <span >Good.</span>
+    </p>
+    <p>
+        <strong>Save</strong> saves if there is new content. It saves all four of the journal, proof, tree, and interpretation. If the document has not been saved before (and thus does not have a file name), it offers a <strong>Save As</strong> dialog and uses the appropriate file name. <span >Good.</span>
+    </p>
+    <p>
+        <strong>Save As. </strong><span >Good.</span>
+    </p>
+    <p>
+        <strong>Save Journal As HTML</strong> does exactly that (but the proof and interpretation are not saved). Saving this way allows the Journal to be opened elsewhere either as a Web page or, for example, in WORD. <span >Good.</span>
+    </p>
+    <p>
+        <strong>The Printing Commands</strong> print. <span >Good.</span>
+    </p>
+    <p>
+        <strong>Quit </strong>quits the entire program. The User is prompted to Save any unsaved documents.<span >Good.</span>
+    </p>
+</blockquote>
+<blockquote>
+    <h3>
+        Edit menu
+    </h3>
+    <img src="/sites/default/files/images/EditMenu.jpg" data-entity-uuid="b7372f54-1f7b-40f2-9242-b360580c1f58" data-entity-type="file" alt="" width="189" height="297">
+    <p>
+        <strong>Undo, Redo, Cut, Copy, Paste, Select All, Find, Replace. </strong><span >All Good.</span> Find and Replace operate only on the text after the insertion point. So, for example, Replace All, with the insertion point at the beginning of the document will replace all in the document, whereas Replace All with the insertion point at the end of the document will replace nothing. This behavior is identical between the CheerpJ and Fat jar versions of Deriver.
+    </p>
+    <p>
+        <strong>Using the System Clipboard.</strong> It should be possible to copy some text, for example, from entirely outside Deriver, then to paste it into the Journal pane. That is, copy to the system clipboard then paste in. <span >Needs some work. The CheerpJ Version seems not able to do this but the Fat jar version of Deriver can.The CheerpJ Version seems to work better for this using only the keyboard equivalents</span>.
+    </p>
+</blockquote>
+<blockquote>
+    <h3>
+        HTML menu
+    </h3>
+    <p>
+        <img src="/sites/default/files/images/HTMLMenu.jpg" data-entity-uuid="788b8bea-d500-41d3-8cbd-9eeff18a797a" data-entity-type="file" alt="" width="35%" height="35%" loading="lazy">
+    </p>
+    <p>
+        <strong>Edit Text and Live Text </strong>'toggle'. The Journal is a web page, which might have url links to other pages or materials. If the Journal is in Edit Text mode (as it usually is) text can be edited, but the links are not active. If the Journal is in Live Text mode the links will be active and clicking on a link will load whatever the link points to. <span >Good.</span>
+    </p>
+    <p>
+        <strong>The HTML editing submenu Blockquote ... Edit Source </strong><span >Seems good, not fully tested.This is not really important as far as the logic goes.</span>
+    </p>
+</blockquote>
+<blockquote>
+    <h3>
+        Semantics menu
+    </h3>
+    <img src="/sites/default/files/images/SemanticsMenu.jpg" data-entity-uuid="6a6a7321-1880-40c2-bb0d-035b6f19e2a3" data-entity-type="file" alt="" width="25%" height="25%">
+    <p>
+        <span >The functions here are 'real' Logic. What they do is explained in detail elsewhere. A summary is</span>
+    </p>
+    <p style="margin-left:40px;">
+        <a href="/node/653" target="_blank"><em><span margin-left:40px;"="">Fast Start on the Deriver web or standalone Application (for Instructors)</span></em></a>
+    </p>
+    <p>
+        <span >The evaluation will just check that the menu items are working correctly.</span>
+    </p>
+    <p>
+        <em><strong>Current Interpretation.</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Current True Propositions.</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>True?</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Satisfiable?</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Endorse?</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Deny?</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>To Symbols?</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>To English?</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Propositional Level</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Predicate Level</strong> <span >Good.</span></em>
+    </p>
+</blockquote>
+<blockquote>
+    <h3>
+        Actions menu
+    </h3>
+    <img src="/sites/default/files/ActionsMenu.jpg" data-entity-uuid="fabe3bef-fc4d-40f5-97e5-2e64da105694" data-entity-type="file" alt="" width="20%" height="20%">
+    <p>
+        <em><strong>Start Proof.</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Start Tree.</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Do Command</strong> <span >Good.</span></em>
+    </p>
+</blockquote>
+<blockquote>
+    <h3>
+        Help menu
+    </h3>
+    <img src="/sites/default/files/HelpMenu.jpg" data-entity-uuid="2428955f-fc5d-4952-9c2a-f1211a33722a" data-entity-type="file" alt="" width="20%" height="20%">
+    <p>
+        <em><strong>About.</strong> <span >Good.</span></em>
+    </p>
+    <p>
+        <em><strong>Preferences.</strong> <span >Good.</span></em>
+    </p>
+</blockquote>
+<p>
+    &nbsp;
+</p>
+<h2>
+    <span >Basically, everything seems to work fine, which certainly is a good result.</span>
+</h2>
+<p>
+    [<strong>WARNING ON A SEPARATE MATTER</strong>: downloading a .jar from an unknown source and running it on your machine is a security risk, and basically should not be done.] If you would like to download Deriver20Fat.jar and run it side-by-side next to the CheerpJ version, you can download it from here <a href="/test/cheerpj/Deriver20Fat.jar" target="_blank">Deriver20Fat.jar</a>&nbsp;and run it with the terminal command %java -jar Deriver20Fat.jar . [You probably do not want to be running Deriver20FatV15.jar from a terminal in as much as it contains a few lines of interface or glue code between it and CheerpJ and that does not really make sense outside of CheerpJ.]
+</p>
+<p>
+    Spare notes
+</p>
+<p>
+    The non-CheerpJ Deriver20.jar, running in Java from a terminal &nbsp;has transparent access to and from the System Clipboard both by menu item and by keyboard equivalent. What this means is that, for example, you can copy some text from completely outside Deriver, say from a WORD document then paste it into Deriver (when the context should allow such a paste). SImilarly, material can be copied from Deriver and pasted into WORD, say. And the operations can be done either by using Cut, Copy, Paste etc. of the Edit Menu or by using the keyboard equivalents (e.g. command-V on a Mac).
+</p>
+<p>
+    The CheerpJ hosted version as installed here has some extra code to do something similar to this, although not quite identical to it. The set-up is more intricate. CheerpJ Deriver is running within a Web Browser, say Brave. Now, Brave has its own Edit Menu with Cut, Copy, Paste, etc. with keyboard equivalents. But, also, Deriver has its own Edit Menu with Cut, Copy, Paste, etc. Then a third-party application such as WORD may well have an Edit Menu or Edit Menus. So, it is a bit of a question as to how all these should work together.&nbsp;
+</p>

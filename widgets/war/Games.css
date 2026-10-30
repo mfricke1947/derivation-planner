@@ -1,0 +1,141 @@
+/*********** newSept 2012 *******/
+    
+      	#journalDiv{
+ 		width:600px;
+    	}
+    
+    
+    .journal
+    	{ width:600px; height:560px; 
+    	font-size: 1.4em; 
+    	margin-left: 20px;
+    	border: 1px; 
+    	background-color: lightgray;
+   	 	}
+   	 	
+  	#buttonsDiv{
+    	position:relative;
+ 		top:20px;
+ 		left:40px;
+ 		width:560px;
+    	}
+   	 	
+	#symbolizeButtonDiv{
+    	position:absolute;
+ 		top:0px;
+ 		left:0px;
+ 		width:180px;
+    	}
+    	
+	.trueButton, .englishButton, .commandButton 
+   		{
+   		font-size: 1.4em; 
+    	width:180px;
+    	height:80px;
+     }      	 	 	
+   	 	
+   	 	
+
+/*********** endOfSepet 2012 *******/
+
+
+
+
+
+/*this override worked, but only for odd numbered lines! 
+
+td.GPBYFDEAD {
+	border-color: black !important;
+    border-style: double !important;
+}
+  */
+
+td.GPBYFDEOC {
+	padding: 0px 0px !important;
+}
+
+th.GPBYFDEFD {
+	padding: 0px 0px !important;
+}
+
+/* 2026 — formula/truth-table cells (propositional symbols are single characters,
+   so a narrow fixed width reads far better than CellTable's wide default). */
+.formulaTable td, .formulaTable th {
+	width: 1.1em;   /*width: 1.4em;*/
+	text-align: center;
+	padding: 0 2px;
+	white-space: nowrap;
+}
+
+
+/* buttons, dynamic correct, incorrect  */
+
+/*
+.correct {
+  border-color: black !important;
+}
+
+.incorrect {
+  border-color: red !important;
+}
+*/
+
+#errors {
+  color: red;
+  padding: 5px;
+}
+
+#label {
+  width: 800px; /*width: 400px; */
+  padding: 5px;
+}
+
+#input {
+  padding: 5px;
+}
+
+#worlds {
+  padding: 5px;
+}
+
+#feedback {
+  padding: 5px;
+}
+
+#access {
+  padding: 5px;
+}
+
+
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}

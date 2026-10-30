@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <link type="text/css" rel="stylesheet" href="../Interpretations.css">
+    <title>Semantics Genzten 24d</title>
+    <!-----------          SVG using embedapi   ----------  -->
+    <!----------- run SVG first to get a target for svgCanvas   ----------  -->
+    <script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapi.js"></script>
+    <script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapiMF.js"></script>
+    <script type="text/javascript">
+	var preloadSvg = '<svg width="560" height="400" xmlns="http://www.w3.org/2000/svg">'+
+' <g id="svg_1">'+
+'  <title>Shape</title>'+
+'  <g id="svg_IBg">'+
+'   <rect height="100" width="140" id="svg_IB" y="0" x="0" stroke="black" fill="none"/>'+
+'   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_line1" y="18" x="70" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">Universe={a,b}</text>'+
+'   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_line1" y="36" x="70" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">F={a}</text>'+
+'   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_line1" y="54" x="70" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">G={b}</text>'+
+'   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_line2" y="72" x="70" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">R={(a,b),(b,a)}</text>'+
+'   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_line2" y="90" x="70" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">S={(a,a),(b,b)}</text>'+
+'  </g>'+
+'  <!--start-->'+
+'  <g id="svg_ag">'+
+'   <circle fill="none" stroke="black" cx="105" cy="204" id="svg_a" r="11"/>'+
+'   <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="105" y="211" id="svg_at" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">a</text>'+
+'  </g>'+
+'  <g id="svg_bg">'+
+'   <circle fill="none" stroke="black" cx="274" cy="182" id="svg_b" r="11"/>'+
+'   <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="274" y="189" id="svg_bt" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">b</text>'+
+'  </g>'+
+'  <g id="svg_Fg" opacity="0.5">'+
+'   <rect stroke-width="5" stroke-opacity="null" stroke="#000000" fill-opacity="null" fill="#FF0000" x="63" y="155" id="svg_F" height="100" width="100"/>'+
+'   <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="113" y="255" id="svg_Ft" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">F</text>'+
+'  </g>'+
+'  <g id="svg_Gg" opacity="0.5">'+
+'   <rect stroke-width="5" stroke-opacity="null" stroke="#000000" fill-opacity="null" fill="#00FFFF" x="233" y="132" id="svg_G" height="100" width="100"/>'+
+'   <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="283" y="232" id="svg_Gt" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">G</text>'+
+'  </g>'+
+'  <defs>'+
+'   <marker orient="auto" markerHeight="6" markerWidth="8" markerUnits="strokeWidth" refY="10" refX="0" viewBox="0 0 20 20" id="Triangle">'+
+'    <path id="svg_2" d="m0,0l20,10l-20,10l0,-20z"/>'+
+'   </marker>'+
+'   <marker markerHeight="80" markerWidth="80" markerUnits="strokeWidth" refY="0" refX="0" viewBox="0 0 80 80" id="RelationR">'+
+'    <text id="svg_3" x="0" y="14" font-size="14">R</text>'+
+'   </marker>'+
+'  </defs>'+
+'  <path stroke="black" fill="none" marker-mid="url(#RelationR)" marker-end="url(#Triangle)" id="svg_relationR" d="m113,196l76.5,-3l76.5,-3"/>'+
+'  <defs>'+
+'   <marker orient="auto" markerHeight="6" markerWidth="8" markerUnits="strokeWidth" refY="10" refX="0" viewBox="0 0 20 20" id="Triangle">'+
+'    <path id="svg_4" d="m0,0l20,10l-20,10l0,-20z"/>'+
+'   </marker>'+
+'   <marker markerHeight="80" markerWidth="80" markerUnits="strokeWidth" refY="0" refX="0" viewBox="0 0 80 80" id="RelationR">'+
+'    <text id="svg_5" x="0" y="14" font-size="14">R</text>'+
+'   </marker>'+
+'  </defs>'+
+'  <path stroke="black" fill="none" marker-mid="url(#RelationR)" marker-end="url(#Triangle)" id="svg_relationR" d="m266,190l-76.5,3l-76.5,3"/>'+
+'  <defs>'+
+'   <marker orient="auto" markerHeight="6" markerWidth="8" markerUnits="strokeWidth" refY="10" refX="0" viewBox="0 0 20 20" id="Triangle">'+
+'    <path id="svg_6" d="m0,0l20,10l-20,10l0,-20z"/>'+
+'    <text id="svg_7" x="0" y="14" font-size="14">S</text>'+
+'   </marker>'+
+'   <marker markerHeight="80" markerWidth="80" markerUnits="strokeWidth" refY="0" refX="0" viewBox="0 0 80 80" id="StartRelationS">'+
+'    <text id="svg_8" x="0" y="20" font-size="14">S</text>'+
+'   </marker>'+
+'  </defs>'+
+'  <path stroke="black" fill="none" marker-start="url(#StartRelationS)" marker-end="url(#Triangle)" id="svg_relationSReflexive" d="m113,212l20,20a20,20 0 1 1 10,10"/>'+
+'  <defs>'+
+'   <marker orient="auto" markerHeight="6" markerWidth="8" markerUnits="strokeWidth" refY="10" refX="0" viewBox="0 0 20 20" id="Triangle">'+
+'    <path id="svg_9" d="m0,0l20,10l-20,10l0,-20z"/>'+
+'    <text id="svg_10" x="0" y="14" font-size="14">S</text>'+
+'   </marker>'+
+'   <marker markerHeight="80" markerWidth="80" markerUnits="strokeWidth" refY="0" refX="0" viewBox="0 0 80 80" id="StartRelationS">'+
+'    <text id="svg_11" x="0" y="20" font-size="14">S</text>'+
+'   </marker>'+
+'  </defs>'+
+'  <path stroke="black" fill="none" marker-start="url(#StartRelationS)" marker-end="url(#Triangle)" id="svg_relationSReflexive" d="m282,190l20,20a20,20 0 1 1 10,10"/>'+
+' </g>'+
+'</svg>';
+</script> <!--       ---------          end of SVG          ----------  -->
+    <script type="text/javascript" language="javascript" src="../interpretations/interpretations.nocache.js"></script>
+  </head>
+  <body> <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabindex="-1" style="position:absolute;width:0;height:0;border:0"></iframe>
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+    <script type="text/javascript" language="javascript">
+   var Parameters = {
+ 
+  fParser: "gentzen",
+  fPropLevel: "false",
+  fAdvancedMenu: "false",
+  fInputText: "<h3>Exercise 1 </h3>"+
+"<p>But </p>"+
+"<blockquote> (∀x)(∃y)Rxy ∴ (∃y)Ryy </blockquote>"+
+"<p> is invalid. Look at the interpretation of the diagram and note that all the premises are true and the conclusion false at one and the same time. </p>"+
+"<h3>Exercise 2</h3>"+
+"<p>Let us consider two arguments with free variables in the standing assumptions</p>"+
+"<blockquote> a) Fx ∴ (∀y)Fx </blockquote>"+
+"<p> and look at this semantically. Is is possible for all the premises to be true and the conclusion false at one and the same time? </p>"+
+"<blockquote>"+
+"<p>a) Fx[a/x] ∴ (∀y)Fx </p>"+
+"</blockquote>"+
+"<p>Move on now to</p>"+
+"<blockquote> b) Fx[a/x] ∴ (∀x)Fx </blockquote>"+
+"<h3>Exercise 3 </h3>"+
+"<p>But</p>"+
+"<blockquote> (∀x)Sxx ∴ (∃y)(∀x)Sxy </blockquote>"+
+"<p> is invalid. Look at the interpretation of the diagram and note that all the premises are true and the conclusion false at one and the same time.</p>"+
+"<h3>Exercise 4</h3>"+
+"<p>i)</p>"+
+"<blockquote>(∃x)Fx∴Fx </blockquote>"+
+"<p> is invalid. To see this we have to value the free x in the conclusion. Thus<br>"+
+"</p>"+
+"<blockquote>"+
+"<p>(∃x)Fx∴Fx[b/x] </p>"+
+"</blockquote>"+
+"<p>ii)</p>"+
+"<p>Consider the argument.</p>"+
+"<blockquote> Gx, (∃x)Fx∴(∃x)(Fx∧Gx) </blockquote>"+
+"<p> It is invalid. To see this we have to value the free x in the premises. Thus<br>"+
+"</p>"+
+"<blockquote> Gx[b/x], (∃x)Fx∴(∃x)(Fx∧Gx) </blockquote>"+
+"<p> In the diagram, this has true premises and a false conclusion(check it). </p>",
+};
+  </script>
+    <div id="container">
+      <iframe src="../svg-edit-2.6-hackCopy/svgEditorMF.html" id="svgedit" onload="startSvg()"
+        height="540px"
+        width="640px"></iframe>
+      <div id="menu"> </div>
+      <div id="menubuttons"> </div>
+      <div id="editbuttons"> </div>
+      <div id="input"> </div>
+      <div id="proof"> </div>
+      <div id="startButton"></div>
+      <div id="journal"></div>
+      <div id="buttons"></div>
+    </div>
+  </body>
+</html>

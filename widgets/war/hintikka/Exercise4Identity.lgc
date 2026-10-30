@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0" class="java.beans.XMLDecoder">
+ <int>3</int>
+ <string>&lt;p&gt; a) PrimeMover(a) &lt;br&gt; &lt;br&gt;b) ∃x(PrimeMover(x)&amp;amp;∀y(PrimeMover(y)→y=x)) &lt;br&gt; &lt;br&gt;There is a Prime Mover, x, and for whatever y you choose, if y is a Prime Mover then y=x.&lt;br&gt;&lt;br&gt;c) Now change the diagram. Click on the selection arrow, top left. Select the PrimeMover rectangle and move it slightly so as to move either a or b outside the rectangle. Have a look the Interpretation. Now run question (b) a second time i.e.&lt;br&gt;&lt;br&gt; d) ∃x(PrimeMover(x)&amp;amp;∀y(PrimeMover(y)→y=x)) &lt;br&gt; &lt;br&gt;N.B. This shows the difference between &quot;a&quot; and &quot;the&quot;.&lt;br&gt;&lt;br&gt; e) ∃x∃y(PrimeMover(x)&amp;amp;PrimeMover(y)&amp;amp;~(x=y)&amp;amp;∀w(PrimeMover(w)→(w=x)∨(w=y))) &lt;br&gt; &lt;br&gt;Try Endorse-Denying this formula using the Interpretion you now have. Then press the button Reset Drawing and Try Endorse-Denying this formula a second time. &lt;/p&gt;</string>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="us.softoption.interpretation.TProperty">
+    <void property="XCoord"><int>134</int></void>
+    <void property="YCoord"><int>154</int></void>
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>134</int><int>154</int><int>205</int><int>97</int></object></void>
+    <void property="color"><object class="java.awt.Color"><int>170</int><int>255</int><int>255</int><int>255</int></object></void>
+    <void property="name"><char>P</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>168</int></void>
+    <void property="YCoord"><int>192</int></void>
+    <void property="name"><char>a</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>274</int></void>
+    <void property="YCoord"><int>194</int></void>
+    <void property="name"><char>b</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>437</int></void>
+    <void property="YCoord"><int>193</int></void>
+    <void property="name"><char>c</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TInterpretationBoard">
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>5</int><int>0</int><int>150</int><int>50</int></object></void>
+    <void property="semantics"><object class="us.softoption.interpretation.TSemantics"/></void>
+   </object>
+  </void>
+ </object>
+ <object class="us.softoption.proofs.TProofTableModel">
+  <void property="head">
+   <void method="add">
+    <object class="us.softoption.proofs.TProofline">
+     <void property="blankline">
+      <boolean>true</boolean>
+     </void>
+     <void property="headlevel">
+      <int>-1</int>
+     </void>
+     <void property="lastAssumption">
+      <boolean>true</boolean>
+     </void>
+     <void property="parser">
+      <object class="us.softoption.parser.TDefaultParser"/>
+     </void>
+     <void property="selectable">
+      <boolean>false</boolean>
+     </void>
+     <void property="subprooflevel">
+      <int>-1</int>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="tail">
+  </void>
+ </object>
+ <object class="us.softoption.tree.TTreeTableModel"/>
+ <object class="us.softoption.editor.TDocState"/>
+</java>

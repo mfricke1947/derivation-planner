@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_31" class="java.beans.XMLDecoder">
+ <int>3</int>
+ <string>
+  
+    
+  
+  
+    &lt;h2&gt;
+      Exercises to accompany Tutorial 6
+    &lt;/h2&gt;
+    &lt;p&gt;
+      5/5/15
+    &lt;/p&gt;
+    &lt;h3&gt;
+      Exercise 1 (of 3)
+    &lt;/h3&gt;
+    &lt;p&gt;
+      Each of the derivations in the following Exercise can be done using the 
+      Rule of Elimination of the Conditional ⊃E, and the rules learned 
+      previously.
+    &lt;/p&gt;
+    &lt;p&gt;
+      If a formula in a line of a derivation has the form
+    &lt;/p&gt;
+    &lt;p style=&quot;margin-left: 40px&quot;&gt;
+      &amp;lt;formula1&amp;gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      and a formula in a line of a derivation has the form
+    &lt;/p&gt;
+    &lt;p style=&quot;margin-left: 40px&quot;&gt;
+      &amp;lt;formula1&amp;gt; ⊃ &amp;lt;formula2&amp;gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      the Rule of Elimination of the Conditional ⊃E allows you to add
+    &lt;/p&gt;
+    &lt;p style=&quot;margin-left: 40px&quot;&gt;
+      &amp;lt;formula2&amp;gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      The elimination of ⊃ {⊃E} is the classical inference rule known as Modus 
+      Ponens. In English, if you have A and If A then B you are entitled to B.
+    &lt;/p&gt;
+    &lt;p&gt;
+      Show each of the following arguments to be valid.
+    &lt;/p&gt;
+    &lt;p&gt;
+      
+    &lt;/p&gt;
+    &lt;blockquote&gt;
+      (a) F, F⊃G ∴ G
+    &lt;/blockquote&gt;
+    &lt;blockquote&gt;
+      (b) F⊃G, F ∴ G&amp;amp;F
+    &lt;/blockquote&gt;
+    &lt;blockquote&gt;
+      (c) F⊃G, G⊃H,F ∴H
+    &lt;/blockquote&gt;
+    &lt;blockquote&gt;
+      (d) F⊃(G⊃H), F⊃G,F ∴H&amp;amp;F
+    &lt;/blockquote&gt;
+    &lt;blockquote&gt;
+      (e) F⊃((~G)⊃H), F⊃~G,F ∴H&amp;amp;F
+    &lt;/blockquote&gt;
+    &lt;p&gt;
+      
+    &lt;/p&gt;
+    &lt;h3&gt;
+      Exercise 2 (of 3)
+    &lt;/h3&gt;
+    &lt;p&gt;
+      Each of the derivations in the following Exercise can be done using only 
+      the rule the Rule of Elimination of the Biconditional ≡E, and the rules 
+      learned previously.
+    &lt;/p&gt;
+    &lt;p&gt;
+      If the formula in a line in a derivation has the form
+    &lt;/p&gt;
+    &lt;p style=&quot;margin-left: 40px&quot;&gt;
+      &amp;lt;formula1&amp;gt;≡&amp;lt;formula2&amp;gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      the Rule of Elimination of the Biconditional ≡E allows you to remove the 
+      biconditional and add either
+    &lt;/p&gt;
+    &lt;p style=&quot;margin-left: 40px&quot;&gt;
+      &amp;lt;formula1&amp;gt;⊃&amp;lt;formula2&amp;gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      or
+    &lt;/p&gt;
+    &lt;p style=&quot;margin-left: 40px&quot;&gt;
+      &amp;lt;formula2&amp;gt;⊃&amp;lt;formula1&amp;gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      as an extra line. You have a choice here (on the direction of the 
+      conditional).
+    &lt;/p&gt;
+    &lt;p&gt;
+      Show each of the following arguments to be valid.
+    &lt;/p&gt;
+    &lt;p&gt;
+      
+    &lt;/p&gt;
+    &lt;blockquote&gt;
+      (a) F≡G ∴ G⊃F&lt;br&gt;(b) F≡G ∴ F⊃G&lt;br&gt;(c) 
+      F≡G, G ∴ H∨F&lt;br&gt;(d) F≡G, G≡H, F ∴ H
+    &lt;/blockquote&gt;
+    &lt;p&gt;
+      
+    &lt;/p&gt;
+    &lt;h3&gt;
+      Exercise 3 (of 3).
+    &lt;/h3&gt;
+    &lt;p&gt;
+      After you have started the proof switch on &apos;Tactics&apos; under the Proof &lt;em&gt;Wizard&lt;/em&gt; 
+      menu, and do the derivations in the following way. If any of the lines &lt;i&gt;you 
+      wish to obtain&lt;/i&gt; has a connective in it, click the appropriate 
+      Introduction rule (in these examples this will split the problem in 
+      two). If any of the lines &lt;i&gt;you have obtained&lt;/i&gt; has a connective in 
+      it, use an Elimination rule to take it out.
+    &lt;/p&gt;
+    &lt;p&gt;
+      
+    &lt;/p&gt;
+    &lt;blockquote&gt;
+      (a) F≡G, H&amp;amp;G ∴G&amp;amp;F
+    &lt;/blockquote&gt;
+    &lt;blockquote&gt;
+      (b) (F&amp;amp;H)&amp;amp;(R&amp;amp;G) ∴F&amp;amp;G
+    &lt;/blockquote&gt;
+    &lt;hr&gt;
+  
+
+</string>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="us.softoption.interpretation.TInterpretationBoard">
+    <void property="semantics">
+     <object class="us.softoption.interpretation.TSemantics" id="TSemantics0">
+      <void class="us.softoption.interpretation.TSemantics" method="getField">
+       <string>b</string>
+       <void method="set">
+        <object idref="TSemantics0"/>
+        <array class="boolean" length="26">
+         <void index="0">
+          <boolean>true</boolean>
+         </void>
+         <void index="2">
+          <boolean>true</boolean>
+         </void>
+         <void index="3">
+          <boolean>true</boolean>
+         </void>
+        </array>
+       </void>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="us.softoption.proofs.bG"/>
+ <object class="us.softoption.tree.TTreeTableModel"/>
+ <object class="us.softoption.editor.TDocState" id="TDocState0">
+  <void property="HDivider">
+   <int>38</int>
+  </void>
+  <void property="VDivider">
+   <int>445</int>
+  </void>
+  <void id="Dimension0" property="browserSize">
+   <void class="java.awt.Dimension" method="getField">
+    <string>width</string>
+    <void method="set">
+     <object idref="Dimension0"/>
+     <int>1226</int>
+    </void>
+   </void>
+   <void class="java.awt.Dimension" method="getField">
+    <string>height</string>
+    <void method="set">
+     <object idref="Dimension0"/>
+     <int>551</int>
+    </void>
+   </void>
+  </void>
+  <void property="propLevel">
+   <boolean>true</boolean>
+  </void>
+ </object>
+</java>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="11.0.5" class="java.beans.XMLDecoder">
+ <int>3</int>
+ <string>
+  
+    
+  
+  
+    &lt;h2&gt;Exercises to accompany Predicate Tutorial 3&lt;/h2&gt;&lt;h2&gt;&lt;div style=&quot;font-size: medium; font-weight: 400;&quot;&gt;&lt;p&gt;Use the&amp;nbsp;&lt;em&gt;Interpretation Tab&lt;/em&gt;&amp;nbsp;to show drawing or interpretation.&amp;nbsp;&lt;/p&gt;&lt;p&gt;In the Drawing (or Interpretation) panel...&lt;/p&gt;&lt;p&gt;Individuals are circles, properties are rectangles which may or may not surround a particular individual, and, later, we will come to relations which are lines which connect individuals.&lt;/p&gt;&lt;p&gt;If an individual is within a property rectangle; it is considered to have that property. If it is not, it does not. So if you have an individual &apos;a&apos;, and no property &apos;P&apos; , then a is taken to lack P and so the formula Pa is false.&lt;/p&gt;&lt;p&gt;Formulas written here in the&amp;nbsp;&lt;em&gt;Journal Panel&lt;/em&gt;&amp;nbsp;are taken to be about the&amp;nbsp;&lt;em&gt;Interpretation Panel.&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Try doing some drawing. Click on the circle in the palette, click on the point you want the individual to be in the window, move it slightly (to show your clicks are really intended), then release. This will leave you a little circle, probably with four blobs on it. The blobs mean that the individual is still selected. Click down somewhere else in the drawing. This will stop the circle being selected, and thus add it. Up in the top left corner is a description of the drawing. You should see that the new entity is now part of the Universe.&lt;/p&gt;&lt;p&gt;Individuals have to be unique. There cannot, for example, be two separate individuals named &apos;c&apos; in the drawing.&lt;/p&gt;&lt;p&gt;If you wish to choose a name for the an entity that you add just use the Name box and type the constant term you want. Try this. Click on the circle in the palette, type lower case &apos;d&apos; in the Name box, draw your circle. This will add &apos;d&apos; to the Universe. If you do not wish to choose, the program will automatically choose names for the entities.&lt;/p&gt;&lt;p&gt;Try drawing some properties. Again if you want to give one a name just type the Predicate you want. Try this. Click on the square in the palette, type upper case &apos;K&apos; in the Name box, draw a square around an existing circle. It is permissable to have two separate areas with the same name (e.g. two different rectangles named &apos;K&apos;).&lt;/p&gt;&lt;p&gt;An individual may or may not have a property. So you can draw (or move) individuals almost anywhere. Properties should really apply to at least one individual. They do not really add anything by being drawn in empty space.&lt;/p&gt;&lt;p&gt;You can colour or shade your properties as you wish.&lt;/p&gt;&lt;/div&gt;&lt;/h2&gt;&lt;h3&gt;Exercise 1 (of 3)&lt;/h3&gt;&lt;h2&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;Consider a) whether the terms (&apos;names&apos;) in the following formulas refer properly to entities in the Universe, and b) whether each formula is true or whether it is false. Select the formula and click&amp;nbsp;&lt;em&gt;True?&amp;nbsp;&lt;/em&gt;to see what the program thinks.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;&lt;/p&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;a) Fa&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;b) Ga&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;c) Fb&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;d) Gb&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;e) Fa≡Gb&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;f) Ga&amp;amp;Fb&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;h) Fb⊃Gb&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;f) Gc&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;g) Ha&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;h) Fa ∨ Fc (*see Note*)&lt;/blockquote&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;&lt;/p&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;(*Note. There are different ways of handling a case like this. On the one hand you can say that Fa is true, therefore the disjunct is true; or you can say that Fc is not entirely proper, therefore it is inappropriate to ask about the truth value of the disjunct. We follow the latter here; but there are occasions when it would be better to follow the former.*)&lt;/blockquote&gt;&lt;/h2&gt;&lt;h3&gt;Exercise 2 (of 3)&lt;/h3&gt;&lt;h2&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;This exercise is similar to the first, but this time we are interested in lists of formulas and the &apos;simultaneous truth&apos; of all the formulas in a list. A list of formulas is just some formulas separated by commas. And a list of formulas is true if and only if all the formulas in the list are true. (So, if at least one formula in a list is false, the whole list is taken to be false.)&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;Use the&amp;nbsp;&lt;em&gt;Interpretation Tab&lt;/em&gt;&amp;nbsp;to show drawing. Consider whether each list of formulas is true or whether it is false. Select the list of formulas and click True? to see what the program thinks.&lt;/p&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;a) Fa, Gb&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;b) Fa, Fa⊃Gb,~Gb&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;c) Ga&amp;amp;Fa, Ha&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;d) Gb∨Ha, Fa&lt;/blockquote&gt;&lt;blockquote style=&quot;font-size: medium; font-weight: 400;&quot;&gt;e) Ra&amp;amp;Rb,Fa&lt;/blockquote&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;&lt;/p&gt;&lt;/h2&gt;&lt;h3&gt;Exercise 3 (of 3).&lt;/h3&gt;&lt;h2&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;When we are trying to establish that an argument is invalid, we look for a counter-example to it. A counter-example is a world or scenario in which all the premises are true and the conclusion false.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;For example, consider the argument&lt;br&gt;&lt;/p&gt;&lt;div style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;&lt;div&gt;If Bert is famous or Arthur is a gambler, then Arthur is famous and Bert is a gambler&lt;/div&gt;&lt;div&gt;Bert is a gambler.&lt;/div&gt;Arthur is famous.&lt;/div&gt;&lt;p style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;Therefore&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;Bert is famous or Arthur is a gambler.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;which symbolizes to&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;(Fb∨Ga)⊃(Fa&amp;amp;Gb)&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;Gb&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;Fa&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;∴&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400; margin-left: 40px;&quot;&gt;Fb∨Ga&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;ask the program about the truth of each of these formulas individually. Notice that in the drawn world all the premises are true and the conclusion false— the depicted world constitutes a counter-example to the argument. It proves that the argument is invalid.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;We can also use a device that we used in propositional logic. Instead of trying to see if all the premises can be true and the conclusion false at one and the same time, we can make a list of all the premises and the negation of the conclusion. Thus&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;(Fb∨Ga)⊃(Fa&amp;amp;Gb), Gb, Fa, ~(Fb∨Ga)&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;now ask the program if this entire list of formulas is true.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;It will tell you that they are. In the jargon, the set of formulas is &apos;satisfiable&apos;.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;In practical cases you will be given the argument and have to produce the counter-example drawing yourself.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;The program can do this for you.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;To show this we need an empty drawing. One way to get this is just to delete the individuals and properties leaving just the Interpretation Display Board.&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;Select the list of formulas&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;(Fb∨Ga)⊃(Fa&amp;amp;Gb), Gb, Fa, ~(Fb∨Ga)&lt;/p&gt;&lt;p style=&quot;font-size: medium; font-weight: 400;&quot;&gt;and click&amp;nbsp;&lt;em&gt;Satisfiable?&lt;/em&gt;, and look at the drawing. [The program should be able to find an Interpretation for you, it might not be able to draw it.]&lt;/p&gt;&lt;/h2&gt;
+  
+
+</string>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="us.softoption.interpretation.TProperty" id="TProperty0">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TProperty0"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TProperty0"/>
+      <char>G</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>192</int>
+    </void>
+    <void property="YCoord">
+     <int>103</int>
+    </void>
+    <void id="Rectangle0" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle0"/>
+       <int>121</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle0"/>
+       <int>71</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle0"/>
+    </void>
+    <void property="color">
+     <object class="java.awt.Color">
+      <int>255</int>
+      <int>0</int>
+      <int>0</int>
+      <int>255</int>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TProperty" id="TProperty1">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TProperty1"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TProperty1"/>
+      <char>F</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>62</int>
+    </void>
+    <void property="YCoord">
+     <int>59</int>
+    </void>
+    <void id="Rectangle1" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle1"/>
+       <int>100</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle1"/>
+       <int>79</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle1"/>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual" id="TIndividual0">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TIndividual0"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TIndividual0"/>
+      <char>b</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>215</int>
+    </void>
+    <void property="YCoord">
+     <int>117</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual" id="TIndividual1">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TIndividual1"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TIndividual1"/>
+      <char>a</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>107</int>
+    </void>
+    <void property="YCoord">
+     <int>86</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TInterpretationBoard" id="TInterpretationBoard0">
+    <void id="Rectangle2" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle2"/>
+       <int>150</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle2"/>
+       <int>50</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle2"/>
+    </void>
+    <void property="semantics">
+     <object class="us.softoption.interpretation.TSemantics" id="TSemantics0">
+      <void class="us.softoption.interpretation.TSemantics" method="getField">
+       <string>fCurrentPropositions</string>
+       <void method="set">
+        <object idref="TSemantics0"/>
+        <array class="boolean" length="26"/>
+       </void>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="us.softoption.proofs.TProofTableModel" id="TProofTableModel0">
+  <void property="head">
+   <void method="add">
+    <object class="us.softoption.proofs.TProofline">
+     <void property="blankline">
+      <boolean>true</boolean>
+     </void>
+     <void property="headlevel">
+      <int>-1</int>
+     </void>
+     <void property="subprooflevel">
+      <int>-1</int>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+ <object class="us.softoption.tree.TTreeTableModel" id="TTreeTableModel0">
+  <void id="DefaultMutableTreeNode0" property="hostRoot">
+   <void id="TTreeDataNode0" property="userObject">
+    <void class="us.softoption.interpretation.TTestNode" method="getField">
+     <string>fParser</string>
+     <void method="set">
+      <object idref="TTreeDataNode0"/>
+      <object class="us.softoption.parser.TParser"/>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TTestNode" method="getField">
+     <string>fTreeNode</string>
+     <void method="set">
+      <object idref="TTreeDataNode0"/>
+      <object idref="DefaultMutableTreeNode0"/>
+     </void>
+    </void>
+   </void>
+  </void>
+  <void property="root">
+   <object idref="TTreeDataNode0"/>
+  </void>
+ </object>
+ <object class="us.softoption.editor.TDocState" id="TDocState0">
+  <void property="HDivider">
+   <int>38</int>
+  </void>
+  <void property="VDivider">
+   <int>252</int>
+  </void>
+  <void id="Dimension0" property="browserSize">
+   <void class="java.awt.Dimension" method="getField">
+    <string>width</string>
+    <void method="set">
+     <object idref="Dimension0"/>
+     <int>987</int>
+    </void>
+   </void>
+   <void class="java.awt.Dimension" method="getField">
+    <string>height</string>
+    <void method="set">
+     <object idref="Dimension0"/>
+     <int>483</int>
+    </void>
+   </void>
+  </void>
+  <void property="propLevel">
+   <boolean>true</boolean>
+  </void>
+  <void property="tabIndex">
+   <int>1</int>
+  </void>
+ </object>
+</java>

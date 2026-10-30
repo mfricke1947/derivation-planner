@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Derivation Planner Preferences</title>
+<style>
+  body{font:14px system-ui,sans-serif;margin:18px;background:#fff;color:#222}
+  h3{margin:0 0 6px}
+  h4{margin:14px 0 2px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#666}
+  label{display:block;margin:7px 0}
+  select{font-size:14px;margin-left:6px}
+  .note{color:#666;font-size:12px;margin-top:14px}
+  .buttons{margin-top:16px;text-align:right}
+  button{font-size:14px;padding:4px 14px}
+  @media (prefers-color-scheme: dark){body{background:#222;color:#eee}.note,h4{color:#aaa}}
+</style></head><body>
+<h3>Preferences</h3>
+<div id="form"></div>
+<div class="note">Choosing a notation sets the tabs, Derive, the Advanced menu and the logic features to what that notation needs; you can change them afterwards.
+These apply to all tabs. Saving reloads the tabs, so anything in the current Journals that has not been saved will be lost.</div>
+<div class="buttons"><button id="cancel">Cancel</button> <button id="reset">Defaults</button>
+<button id="save" style="font-weight:600">Save</button></div>
+<script>
+  const { ipcRenderer } = require('electron');
+  let schema, parsers, setups, symbolizeParsers, setupKeys;
+  const form = document.getElementById('form');
+
+  function render(prefs) {
+    form.innerHTML = '';
+    let group = null;
+    for (const s of schema) {
+      if (s.group !== group) {
+        group = s.group;
+        const h = document.createElement('h4'); h.textContent = { Notation: 'Notation', Tabs: 'Tabs shown', Proofs: 'Proofs', Logic: 'Logic features', Other: 'Other' }[group] || group;
+        form.appendChild(h);
+      }
+      const l = document.createElement('label');
+      if (s.key === 'fParser') {
+        l.append(s.label + ':');
+        const sel = document.createElement('select'); sel.id = s.key;
+        for (const p of parsers) { const o = document.createElement('option'); o.value = o.textContent = p; sel.appendChild(o); }
+        sel.value = prefs[s.key]; l.appendChild(sel);
+        sel.addEventListener('change', () => applySetup(sel.value));
+      } else {
+        const c = document.createElement('input'); c.type = 'checkbox'; c.id = s.key; c.checked = !!prefs[s.key];
+        l.append(c, ' ' + s.label);
+      }
+      form.appendChild(l);
+    }
+    limitSymbolize();
+  }
+  // Choosing a notation sets the tab / Derive checkboxes to what that notation needs (they can be changed afterwards).
+  function applySetup(parser) {
+    const setup = setups[parser] || {};
+    for (const k of setupKeys) { const el = document.getElementById(k); if (el && k in setup) el.checked = !!setup[k]; }
+    limitSymbolize();
+  }
+  // The Symbolize widget exists only for some notations: for the others its box is off and cannot be ticked.
+  function limitSymbolize() {
+    const el = document.getElementById('tabSymbolize'), sel = document.getElementById('fParser');
+    if (!el || !sel) return;
+    const ok = symbolizeParsers.includes(sel.value);
+    el.disabled = !ok;
+    if (!ok) el.checked = false;
+    el.parentNode.style.opacity = ok ? '' : '0.55';
+  }
+  function collect() {
+    const out = {};
+    for (const s of schema) {
+      const el = document.getElementById(s.key);
+      out[s.key] = s.key === 'fParser' ? el.value : el.checked;
+    }
+    return out;
+  }
+  ipcRenderer.invoke('prefs-get').then(d => { schema = d.schema; parsers = d.parsers; setups = d.setups; symbolizeParsers = d.symbolizeParsers; setupKeys = d.setupKeys; render(d.prefs); window.defaults = d.defaults; });
+  document.getElementById('save').onclick = () => ipcRenderer.send('prefs-save', collect());
+  document.getElementById('cancel').onclick = () => window.close();
+  document.getElementById('reset').onclick = () => render(window.defaults);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') window.close(); });
+</script></body></html>

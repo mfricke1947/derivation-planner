@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- Start page for the Symbolize tab (English <-> logic). Served by main.js from pages/; the compiled
+         widget itself is the bundled vendor/symbolize13 (see its README.md). The look is pages/symbolize.css (matching the
+         other tabs), not the widget's old website stylesheet. -->
+    <link type="text/css" rel="stylesheet" href="/pages/symbolize.css">
+    <title>Symbolize</title>
+    <script type="text/javascript" language="javascript" src="/vendor/symbolize13/symbolize13/symbolize13.nocache.js"></script>
+  </head>
+  <body>
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabindex="-1" style="position:absolute;width:0;height:0;border:0"></iframe>
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <script type="text/javascript" language="javascript">
+   // main.js overrides fParser (and the other shared settings) with the user's Preferences when it serves this page.
+   var Parameters = {
+  fInputText: "Type or paste English sentences here. Select a sentence and click To Symbols to see how the program " +
+"symbolizes it; select a formula and click To English to translate it back. Select a command and click Do Command " +
+"to set up the program's vocabulary.\n\n" +
+"For example, select this sentence and click To Symbols:\n\n" +
+"If Arthur is a nincompoop then Charles is a philosopher.",
+  fParser: "default"
+};
+  </script>
+
+    <div id="container">
+      <h3>&nbsp;Symbolize</h3>
+
+      <div id="buttonsDiv">
+        <div id="symbolizeButtonDiv"> </div>
+        <div id="englishButtonDiv"> </div>
+        <div id="commandButtonDiv"> </div>
+        <div id="errorLabelDiv"> </div>
+      </div>
+
+      <!-- symbol palette, like the other tabs'; the symbols are taken from the Proofs tab so they always match the chosen notation -->
+      <div id="palette" class="gwt-RichTextToolbar"></div>
+
+      <!-- The Journal is a rich-text box like the other tabs' (an editable document in an iframe), so layout (headings, lists, bold) shows.
+           The compiled widget only knows a plain text box: it keeps one in #journalDiv, moved off-screen, and the script below hands it
+           the selected text (as plain text) whenever one of its buttons is clicked and puts its answer back over the selection. -->
+      <div id="journal"><iframe id="richJournal"></iframe></div>
+      <div id="journalDiv"> </div>
+    </div>
+
+    <script type="text/javascript" language="javascript">
+    (function () {
+      var FALLBACK = ['\u223C', '&', '\u2228', '\u2283', '\u2261', '\u2200', '\u2203', '\u2234'];
+      var bar = document.getElementById('palette');
+
+      function insert(sym) {                       // at the caret, replacing any selection, in the rich Journal
+        var f = document.getElementById('richJournal');
+        f.contentWindow.focus();
+        f.contentDocument.execCommand('insertText', false, sym);
+      }
+      function build(symbols) {
+        bar.innerHTML = '';
+        symbols.forEach(function (sym) {
+          var b = document.createElement('div');
+          b.className = 'gwt-PushButton gwt-PushButton-up';
+          b.innerHTML = '<div class="html-face"></div>';
+          b.firstChild.textContent = sym;
+          b.addEventListener('mousedown', function (e) { e.preventDefault(); });   // keep the Journal's selection and focus
+          b.addEventListener('click', function () { insert(sym); });
+          b.addEventListener('mouseover', function () { b.className = 'gwt-PushButton gwt-PushButton-up-hovering'; });
+          b.addEventListener('mouseout', function () { b.className = 'gwt-PushButton gwt-PushButton-up'; });
+          bar.appendChild(b);
+        });
+      }
+      // The Proofs tab (a sibling page in the shell) builds its palette from the chosen notation; use the same symbols.
+      var tries = 0;
+      (function wait() {
+        var syms = null;
+        try { syms = window.parent && window.parent.getPaletteSymbols && window.parent.getPaletteSymbols(); } catch (e) {}
+        if (syms && syms.length) return build(syms);
+        if (++tries > 40) return build(FALLBACK);             // ~8s: standalone, or the other tab never came up
+        setTimeout(wait, 200);
+      })();
+    })();
+    </script>
+
+    <script type="text/javascript" language="javascript">
+    // ---- Rich Journal <-> the widget's plain text box -------------------------------------------------------------------
+    // Every widget button (To Symbols, To English, Do Command) does the same thing with its text box: read the selected text,
+    // then replace exactly that selection with its result (TGwtUtilities.writeOverJournalSelection). So on each click, before the
+    // widget runs, the rich Journal is flattened to plain text into the widget's hidden box with the same selection; afterwards the
+    // result is read back out of the box and written over the same selection in the rich text (insertText, so Undo works). Only the
+    // replaced words lose formatting; the rest of the layout is untouched.
+    (function () {
+      var frame = document.getElementById('richJournal');
+      var doc = frame.contentDocument;
+      doc.open();
+      doc.write('<!DOCTYPE html><html><head><meta charset="utf-8"><style>html{background:#fff}body{margin:8px;font:16px Times,"Times New Roman",serif;color:#000}</style></head><body></body></html>');
+      doc.close();
+      doc.designMode = 'on';
+      var body = doc.body;
+
+      function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+      function textToHtml(t) {                       // plain starting text -> paragraphs (blank line) and line breaks
+        return t.split(/\n{2,}/).map(function (p) { return '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>'; }).join('');
+      }
+      body.innerHTML = textToHtml((typeof Parameters === 'object' && Parameters.fInputText) || '');
+
+      var BLOCK = /^(P|DIV|H[1-6]|UL|OL|LI|BLOCKQUOTE|PRE|TABLE|TR|TD|TH|HR)$/;
+      // Plain-text form of the rich content, plus where each piece of it sits: segs = [{node, start, len}] for text nodes (len = length)
+      // and <br> (len 1, stands for "\n"). A newline is inserted between blocks. Non-breaking spaces become spaces (1:1, offsets agree).
+      function flatten() {
+        var text = '', segs = [], pending = false;
+        function brk() { if (text && text.charAt(text.length - 1) !== '\n') text += '\n'; }
+        (function walk(n) {
+          if (n.nodeType === 3) {
+            if (pending) { brk(); pending = false; }
+            segs.push({ node: n, start: text.length, len: n.data.length });
+            text += n.data.replace(/ /g, ' ');
+          } else if (n.nodeType === 1) {
+            if (n.tagName === 'BR') { segs.push({ node: n, start: text.length, len: 1 }); text += '\n'; pending = false; return; }
+            var blk = BLOCK.test(n.tagName);
+            if (blk) pending = true;
+            Array.prototype.forEach.call(n.childNodes, walk);
+            if (blk) pending = true;
+          }
+        })(body);
+        return { text: text, segs: segs };
+      }
+      // A DOM point (container, offset) -> index in the plain text.
+      function toPlain(fl, container, offset) {
+        if (container.nodeType === 3) {
+          for (var i = 0; i < fl.segs.length; i++) if (fl.segs[i].node === container) return fl.segs[i].start + offset;
+        }
+        var pr = doc.createRange(); pr.setStart(container, offset); pr.collapse(true);
+        for (var j = 0; j < fl.segs.length; j++) if (pr.comparePoint(fl.segs[j].node, 0) >= 0) return fl.segs[j].start;
+        return fl.text.length;
+      }
+      // Plain index -> DOM point. `atEnd` picks the segment ending at the index (an end point) rather than the one starting there.
+      function toDom(fl, idx, atEnd) {
+        for (var i = 0; i < fl.segs.length; i++) {
+          var g = fl.segs[i];
+          if (g.node.nodeType !== 3) continue;
+          if (atEnd ? (idx > g.start && idx <= g.start + g.len) : (idx >= g.start && idx < g.start + g.len)) return { node: g.node, offset: idx - g.start };
+        }
+        return null;
+      }
+
+      var ctx = null;
+      function mirror() { return document.querySelector('#journalDiv textarea'); }
+      function before() {
+        var ta = mirror(), sel = doc.getSelection();
+        ctx = null;
+        if (!ta || !sel || !sel.rangeCount) return;
+        var fl = flatten(), r = sel.getRangeAt(0);
+        var s = toPlain(fl, r.startContainer, r.startOffset), e = toPlain(fl, r.endContainer, r.endOffset);
+        while (s < e && fl.text.charAt(s) === '\n') s++;              // a selection that spills into a paragraph break
+        while (e > s && fl.text.charAt(e - 1) === '\n') e--;
+        ta.value = fl.text; ta.setSelectionRange(s, e);
+        ctx = { fl: fl, s: s, e: e };
+        setTimeout(after, 0);                                          // after the widget's own click handler has run
+      }
+      function after() {
+        var c = ctx, ta = mirror(); ctx = null;
+        if (!c || !ta) return;
+        var T = c.fl.text, N = ta.value;
+        if (N === T) return;                                           // nothing changed (e.g. an error message in the label)
+        var tail = T.length - c.e, head = T.slice(0, c.s);
+        if (N.slice(0, c.s) !== head || N.slice(N.length - tail) !== T.slice(c.e) || N.length - tail < c.s) {
+          console.log('Symbolize: the widget changed more than the selection; replacing the whole Journal text');
+          body.innerHTML = textToHtml(N); return;
+        }
+        var R = N.slice(c.s, N.length - tail);
+        var a = toDom(c.fl, c.s, false), b = toDom(c.fl, c.e, true);
+        frame.contentWindow.focus();
+        if (a && b) {
+          var rg = doc.createRange(); rg.setStart(a.node, a.offset); rg.setEnd(b.node, b.offset);
+          var sel = doc.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+          doc.execCommand(R === '' ? 'delete' : 'insertText', false, R);
+        } else body.innerHTML = textToHtml(N);
+      }
+      var bar = document.getElementById('buttonsDiv');
+      bar.addEventListener('mousedown', function (e) { if (e.target.closest('button')) e.preventDefault(); }, true);   // keep the Journal's selection
+      bar.addEventListener('click', function (e) { if (e.target.closest('button')) before(); }, true);               // capture: runs before the widget's handler
+      window.__symbolizeRich = { flatten: flatten };                    // for the tests
+    })();
+    </script>
+  </body>
+</html>

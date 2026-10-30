@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="../Interpretations.css">
+    <link type="text/css" rel="stylesheet" href="../interpretations/gwt/standard/standard.css">
+
+    <title>Interpretations</title>
+
+  <!-----------          SVG using embedapi   ----------  -->
+  <!----------- run SVG first to get a target for svgCanvas   ----------  -->
+
+<script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapi.js"></script>
+
+<script type="text/javascript" src="../svg-edit-2.6-hackCopy/embedapiMF.js"></script>
+
+<script type="text/javascript">
+	var preloadSvg = '<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg"> <g id="svg_1"> <title>Layer 1</title> <g id="svg_IBg"> <rect fill="none" stroke="black" x="0" y="0" id="svg_IB" width="230" height="76"/> <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="115" y="18" id="svg_line1" font-size="18" font-family="serif" text-anchor="middle" xml:space="preserve">Universe={a,b,c}</text> <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="115" y="36" id="svg_line1" font-size="16" font-family="serif" text-anchor="middle" xml:space="preserve">C (Cat) = {a}</text> <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="115" y="54" id="svg_line1" font-size="16" font-family="serif" text-anchor="middle" xml:space="preserve">M (Mammal) = {a,b}</text> <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="115" y="72" id="svg_line1" font-size="16" font-family="serif" text-anchor="middle" xml:space="preserve">U (Unicorn) = { }</text> </g> <!--start--> <g id="svg_ag"> <circle r="11" id="svg_a" cy="220" cx="90" stroke="black" fill="none"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_at" y="227" x="90" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">a</text> </g> <g id="svg_bg"> <circle r="11" id="svg_b" cy="220" cx="230" stroke="black" fill="none"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_bt" y="227" x="230" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">b</text> </g> <g id="svg_cg"> <circle r="11" id="svg_c" cy="220" cx="400" stroke="black" fill="none"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_ct" y="227" x="400" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">c</text> </g> <g opacity="0.5" id="svg_Mg"> <rect width="220" height="110" id="svg_M" y="165" x="50" fill="#00BFFF" fill-opacity="null" stroke="#000000" stroke-opacity="null" stroke-width="5"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_Mt" y="268" x="160" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">M</text> </g> <g opacity="0.5" id="svg_Cg"> <rect width="80" height="80" id="svg_C" y="180" x="50" fill="#FF0000" fill-opacity="null" stroke="#000000" stroke-opacity="null" stroke-width="5"/> <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="svg_Ct" y="292" x="90" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">C</text> </g> </g> </svg>';
+</script>
+
+<!--       ---------          end of SVG          ----------  -->
+
+<script type="text/javascript" language="javascript" src="../interpretations/interpretations.nocache.js"></script>
+
+  </head>
+
+
+  <body>
+
+    <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <script type="text/javascript" language="javascript">
+   var Parameters = {
+
+  fParser: "default",
+  fIdentity: "false",
+  fAdvancedMenu: "true",
+  fInputText: "<p> a) ∀xCat(x) <br> <br>b) ∃xCat(x) <br><br>c) ∀x(Cat(x)→Mammal(x)) <br><br> d) ∀x(Mammal(x)→∀Cat(x)) <br><br> e) ∀x(Unicorn(x)→Mammal(x)) <br><br> f) ∃xUnicorn(x) <br><br> g) ∀x(Unicorn(x)→Mammal(x)) & ∃xUnicorn(x) <br><br> h) ∀x(Unicorn(x)→~Mammal(x)) <br><br> i) ∀xUnicorn(x) <br><br> j) ∃x(Cat(x)&Mammal(x)) <br><br> k) ∃x(Mammal(x)&~Cat(x))<br><br>l) ~∀x(Cat(x)→Mammal(x)) <br><br> m) ∀x(Cat(x)→~Mammal(x))</p>",
+
+};
+  </script>
+
+<div id="container">
+
+<h3>Exercise 2: A single quantifier</h3>
+
+<iframe src="../svg-edit-2.6-hackCopy/svgEditorMF.html" width="640px" height="540px" id="svgedit"
+onload="startSvg()"></iframe>
+
+<div id="menu"> </div>
+
+<div id="menubuttons"> </div>
+
+<div id="editbuttons"> </div>
+
+<div id="input"> </div>
+
+<div id="proof"> </div>
+
+<div id="startButton" ></div>
+
+<div id="journal" ></div>
+
+<div id="buttons"></div>
+
+ </div>
+
+
+  </body>
+</html>

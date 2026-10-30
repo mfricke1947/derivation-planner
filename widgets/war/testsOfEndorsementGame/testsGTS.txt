@@ -1,0 +1,46 @@
+Universe = {a,b} F={a} G=(b)
+F(a)
+You endorsed F(a)
+This reduces to the atomic formula F(a), which is actually TRUE in this Interpretation. The claim holds up -- you win this game!
+F(a)
+You denied F(a)
+This reduces to the atomic formula F(a), which is actually TRUE in this Interpretation. That contradicts what was claimed -- I win this game (this is exactly where the error is).
+F(b)
+You endorsed F(b)
+This reduces to the atomic formula F(b), which is actually FALSE in this Interpretation. That contradicts what was claimed -- I win this game (this is exactly where the error is).
+F(b)
+You denied F(b)
+This reduces to the atomic formula F(b), which is actually FALSE in this Interpretation. The claim holds up -- you win this game!
+~F(a)
+You endorsed ∼F(a)
+You deny F(a)
+This reduces to the atomic formula F(a), which is actually TRUE in this Interpretation. That contradicts what was claimed -- I win this game (this is exactly where the error is).
+
+~F(a)
+You denied ∼F(a)
+You endorse F(a)
+This reduces to the atomic formula F(a), which is actually TRUE in this Interpretation. The claim holds up -- you win this game!
+
+~F(b)
+You endorsed ∼F(b)
+You deny F(b)
+This reduces to the atomic formula F(b), which is actually FALSE in this Interpretation. The claim holds up -- you win this game!
+
+~F(b)
+You denied ∼F(b)
+You endorse F(b)
+This reduces to the atomic formula F(b), which is actually FALSE in this Interpretation. That contradicts what was claimed -- I win this game (this is exactly where the error is).
+
+
+F(a)&G(b).  WRONG
+You endorsed F(a)&G(b)
+I deny F(a)
+This reduces to the atomic formula F(a), which is actually TRUE in this Interpretation. That contradicts what was claimed -- I win this game (this is exactly where the error is).
+
+
+F(a)
+You endorsed F(a)
+This reduces to the atomic formula F(a), which is actually TRUE in this Interpretation. The claim holds up -- you win this game!
+F(a)
+You denied F(a)
+This reduces to the atomic formula F(a), which is actually TRUE in this Interpretation. That contradicts what was claimed -- I win this game (this is exactly where the error is).

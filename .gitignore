@@ -1,0 +1,26 @@
+node_modules/
+build/
+dist/
+.DS_Store
+*.icloud
+# personal notes and working files, not part of the project
+ANotesForMartinNotClaude.txt
+CLAUDE.md
+converted/
+SomeTestFiles/
+ExercisesFromWebsite/
+ScrapForEditing.html
+icons/*.iconset/
+icons/cmp.*
+icons/preview.*
+icons/doc-preview.png
+
+# credentials / local tooling: never commit
+oldCerts/
+.claude/
+*.p12
+*.cer
+*.pem
+*.key
+*.certSigningRequest
+*.mobileprovision

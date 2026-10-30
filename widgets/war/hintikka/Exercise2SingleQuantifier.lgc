@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0" class="java.beans.XMLDecoder">
+ <int>3</int>
+ <string>&lt;p&gt; a) ∀xCat(x) &lt;br&gt; &lt;br&gt;b) ∃xCat(x) &lt;br&gt;&lt;br&gt;c) ∀x(Cat(x)→Mammal(x)) &lt;br&gt;&lt;br&gt; d) ∀x(Mammal(x)→∀Cat(x)) &lt;br&gt;&lt;br&gt; e) ∀x(Unicorn(x)→Mammal(x)) &lt;br&gt;&lt;br&gt; f) ∃xUnicorn(x) &lt;br&gt;&lt;br&gt; g) ∀x(Unicorn(x)→Mammal(x)) &amp;amp; ∃xUnicorn(x) &lt;br&gt;&lt;br&gt; h) ∀x(Unicorn(x)→~Mammal(x)) &lt;br&gt;&lt;br&gt; i) ∀xUnicorn(x) &lt;br&gt;&lt;br&gt; j) ∃x(Cat(x)&amp;amp;Mammal(x)) &lt;br&gt;&lt;br&gt; k) ∃x(Mammal(x)&amp;amp;~Cat(x))&lt;br&gt;&lt;br&gt;l) ~∀x(Cat(x)→Mammal(x)) &lt;br&gt;&lt;br&gt; m) ∀x(Cat(x)→~Mammal(x))&lt;/p&gt;</string>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="us.softoption.interpretation.TProperty">
+    <void property="XCoord"><int>50</int></void>
+    <void property="YCoord"><int>180</int></void>
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>50</int><int>180</int><int>80</int><int>80</int></object></void>
+    <void property="color"><object class="java.awt.Color"><int>255</int><int>0</int><int>0</int><int>255</int></object></void>
+    <void property="name"><char>C</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TProperty">
+    <void property="XCoord"><int>50</int></void>
+    <void property="YCoord"><int>165</int></void>
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>50</int><int>165</int><int>220</int><int>110</int></object></void>
+    <void property="color"><object class="java.awt.Color"><int>0</int><int>191</int><int>255</int><int>255</int></object></void>
+    <void property="name"><char>M</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>83</int></void>
+    <void property="YCoord"><int>213</int></void>
+    <void property="name"><char>a</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>223</int></void>
+    <void property="YCoord"><int>213</int></void>
+    <void property="name"><char>b</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>393</int></void>
+    <void property="YCoord"><int>213</int></void>
+    <void property="name"><char>c</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TInterpretationBoard">
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>5</int><int>0</int><int>150</int><int>50</int></object></void>
+    <void property="semantics"><object class="us.softoption.interpretation.TSemantics"/></void>
+   </object>
+  </void>
+ </object>
+ <object class="us.softoption.proofs.TProofTableModel">
+  <void property="head">
+   <void method="add">
+    <object class="us.softoption.proofs.TProofline">
+     <void property="blankline">
+      <boolean>true</boolean>
+     </void>
+     <void property="headlevel">
+      <int>-1</int>
+     </void>
+     <void property="lastAssumption">
+      <boolean>true</boolean>
+     </void>
+     <void property="parser">
+      <object class="us.softoption.parser.TDefaultParser"/>
+     </void>
+     <void property="selectable">
+      <boolean>false</boolean>
+     </void>
+     <void property="subprooflevel">
+      <int>-1</int>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="tail">
+  </void>
+ </object>
+ <object class="us.softoption.tree.TTreeTableModel"/>
+ <object class="us.softoption.editor.TDocState"/>
+</java>

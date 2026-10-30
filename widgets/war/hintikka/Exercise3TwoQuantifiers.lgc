@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0" class="java.beans.XMLDecoder">
+ <int>3</int>
+ <string>&lt;p&gt; a) Cause(b,a) &lt;br&gt; &lt;br&gt;b) Cause(a,c) &lt;br&gt;&lt;br&gt;c) Cause(c,b) &lt;br&gt;&lt;br&gt; d) Cause(a,b) &lt;br&gt;&lt;br&gt; e) ∀x∃yCause(y,x) Whatever x you choose, there is a y that caused it. &lt;br&gt;&lt;br&gt; f) ∃y∀xCause(y,x) There is a y such that whatever x you choose y caused it. &lt;br&gt;&lt;br&gt; g) ∀x¬Cause(x,x) &lt;br&gt;&lt;br&gt; h) ∃x∃y(Cause(x,y)&amp;amp;Cause(y,x)) &lt;/p&gt;</string>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>143</int></void>
+    <void property="YCoord"><int>133</int></void>
+    <void property="name"><char>a</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>393</int></void>
+    <void property="YCoord"><int>133</int></void>
+    <void property="name"><char>b</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual">
+    <void property="XCoord"><int>268</int></void>
+    <void property="YCoord"><int>323</int></void>
+    <void property="name"><char>c</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TInterpretationBoard">
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>5</int><int>0</int><int>150</int><int>50</int></object></void>
+    <void property="semantics"><object class="us.softoption.interpretation.TSemantics"/></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TRelation">
+    <void property="XCoord"><int>150</int></void>
+    <void property="YCoord"><int>140</int></void>
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>150</int><int>140</int><int>125</int><int>190</int></object></void>
+    <void property="from"><object class="java.awt.Point"><int>150</int><int>140</int></object></void>
+    <void property="name"><char>C</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+    <void property="to"><object class="java.awt.Point"><int>275</int><int>330</int></object></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TRelation">
+    <void property="XCoord"><int>150</int></void>
+    <void property="YCoord"><int>140</int></void>
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>150</int><int>140</int><int>250</int><int>0</int></object></void>
+    <void property="from"><object class="java.awt.Point"><int>400</int><int>140</int></object></void>
+    <void property="name"><char>C</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+    <void property="to"><object class="java.awt.Point"><int>150</int><int>140</int></object></void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TRelation">
+    <void property="XCoord"><int>275</int></void>
+    <void property="YCoord"><int>140</int></void>
+    <void property="boundsRect"><object class="java.awt.Rectangle"><int>275</int><int>140</int><int>125</int><int>190</int></object></void>
+    <void property="from"><object class="java.awt.Point"><int>275</int><int>330</int></object></void>
+    <void property="name"><char>C</char></void>
+    <void property="selected"><boolean>false</boolean></void>
+    <void property="to"><object class="java.awt.Point"><int>400</int><int>140</int></object></void>
+   </object>
+  </void>
+ </object>
+ <object class="us.softoption.proofs.TProofTableModel">
+  <void property="head">
+   <void method="add">
+    <object class="us.softoption.proofs.TProofline">
+     <void property="blankline">
+      <boolean>true</boolean>
+     </void>
+     <void property="headlevel">
+      <int>-1</int>
+     </void>
+     <void property="lastAssumption">
+      <boolean>true</boolean>
+     </void>
+     <void property="parser">
+      <object class="us.softoption.parser.TDefaultParser"/>
+     </void>
+     <void property="selectable">
+      <boolean>false</boolean>
+     </void>
+     <void property="subprooflevel">
+      <int>-1</int>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="tail">
+  </void>
+ </object>
+ <object class="us.softoption.tree.TTreeTableModel"/>
+ <object class="us.softoption.editor.TDocState"/>
+</java>

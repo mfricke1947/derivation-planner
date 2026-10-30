@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <link type="text/css" rel="stylesheet" href="../TreesJS.css">
+    <title>Tutorial 2</title>
+    <script type="text/javascript" language="javascript" src="../treesjs/treesjs.nocache.js"></script>
+  </head>
+  <body> <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabindex="-1" style="position:absolute;width:0;height:0;border:0"></iframe>
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+    <script type="text/javascript" language="javascript">
+   var Parameters = {
+ 
+  fParser: "barwise",
+  
+  tree0: value="Adjoins(a,b),  ∴ ~Adjoins(b,a)",
+  tree1: value="FrontOf(a,b),FrontOf(b,c) ∴ FrontOf(a,c)",
+  tree2: value="BackOf(a,b),BackOf(b,c) ∴ BackOf(a,c)",
+     tree3: value="FrontOf(a,b) ∴ BackOf(b,a)",
+     tree4: value="Smaller(a,b),  ∴ ~Larger(b,a)",
+      tree5: value="Larger(a,b),Larger(b,c) ∴ Larger(a,c)",
+  
+};
+  </script>
+    <div id="container">
+      <h3>Trees</h3>
+      <div id="menu"> </div>
+      <div id="menubuttons"> </div>
+      <div id="input"> </div>
+      <div id="tree"> </div>
+      <div id="journal"></div>
+      <div id="startButton"></div>
+      <div id="buttons"></div>
+    </div>
+  </body>
+</html>

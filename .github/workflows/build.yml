@@ -1,0 +1,47 @@
+name: Build installers
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write   # to attach installers to a release
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Stage the compiled widgets
+        run: node tools/stage-war.js
+      - name: Build the installer
+        run: npx electron-builder --win --publish never
+      - name: Smoke test (silent install, start the app, wait for every widget)
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem dist -Filter *.exe | Select-Object -First 1
+          Write-Host "Installer: $($installer.Name)"
+          Start-Process -FilePath $installer.FullName -ArgumentList '/S', '/D=C:\dp-test' -Wait
+          $env:DERIVER_SMOKE_OUT = "$PWD\smoke.json"
+          $p = Start-Process -FilePath 'C:\dp-test\Derivation Planner.exe' -ArgumentList '--user-data-dir=C:\dp-userdata' -PassThru -Wait
+          if (Test-Path smoke.json) { Get-Content smoke.json } else { Write-Host 'no smoke report written' }
+          if ($p.ExitCode -ne 0) { throw "smoke test failed (exit code $($p.ExitCode))" }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: dist/*.exe
+      - name: Attach to the GitHub release (tagged builds)
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "${{ github.ref_name }}" 2>$null
+          if ($LASTEXITCODE -ne 0) { gh release create "${{ github.ref_name }}" --title "Derivation Planner ${{ github.ref_name }}" --generate-notes }
+          Get-ChildItem dist -Filter *.exe | ForEach-Object { gh release upload "${{ github.ref_name }}" $_.FullName --clobber }

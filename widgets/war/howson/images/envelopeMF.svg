@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<svg width="124" height="76" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <rect fill="none" stroke="#000000" stroke-width="4" x="22" y="10" width="100" height="64" id="svg_3"/>
+  <line fill="none" stroke="#000000" stroke-width="4" x1="22" y1="10" x2="70" y2="55" id="svg_4"/>
+  <line fill="none" stroke="#000000" stroke-width="4" x1="70" y1="55" x2="122" y2="10" id="svg_5"/>
+ </g>
+</svg>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- Start page for the optional Games tab (preference "gamesTab"). It plays the role of the war/stegeman/games/*.html
+         host pages, one page for all five propositional games: the game is chosen with the select box (page reload with
+         ?game=...), which sets Parameters.fTitle and the instruction text. The compiled widget is the Stegeman project's
+         war/games, read-only. Served from pages/; the widget's files are reached by absolute URL. -->
+    <!-- The widget finds its images (the tree diagonals of Branches: images/leftDiag.png ...) relative to the page; this page lives in /pages/,
+         the images in /images/ (the war folder), so resolve relative addresses from the root. -->
+    <base href="/">
+    <link type="text/css" rel="stylesheet" href="/Games.css">
+    <link type="text/css" rel="stylesheet" href="/games/gwt/standard/standard.css">
+    <style>
+      html body { margin: 0; background: #fff; color: #000; }
+      #container { margin: 0 5px; }
+      #chooser { margin: 8px 0 4px 0; font: 13px Arial, sans-serif; }
+      #chooser select { font: 13px Arial, sans-serif; }
+      #buttonsDiv { margin: 6px 0; }
+      #trueButtonDiv button { width: auto !important; height: auto !important; margin: 0 !important; font: 13px Arial, sans-serif; padding: 3px 5px; }
+      #journalDiv textarea { width: 100%; box-sizing: border-box; height: 240px; margin: 0; padding: 8px; background: #fff; border: 0; outline: none; resize: none; font: 16px Times, "Times New Roman", serif; }
+      html.truthvalue #menu, html.truthvalue #menubuttons, html.truthvalue #tree, html.truthvalue #startButton, html.truthvalue #journal, html.truthvalue #input, html.truthvalue #errors, html.truthvalue #buttons, html.truthvalue #feedback { display: none; }
+      html:not(.truthvalue) #journalDiv, html:not(.truthvalue) #buttonsDiv { display: none; }
+    </style>
+    <title>Games</title>
+    <script type="text/javascript" language="javascript" src="/games/games.nocache.js"></script>
+  </head>
+  <body>
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabindex="-1" style="position:absolute;width:0;height:0;border:0"></iframe>
+    <script type="text/javascript" language="javascript">
+      // The two "Propositional Truth" games are the PropTruth mode of the widget: a Journal of formulas built from True and
+      // False; select a formula (or a part of one) and click True? (as on softoption.us GamesPropTruthBergmann*.html).
+      var PT_HELP = 'Form a view on whether each formula is true or false. Then select a formula built from True and False (for a bigger formula, an inner part such as True \u2228 False) and click True? to see what the program thinks: it writes T or F over your selection. Work from the inside out, one step at a time.';
+      var TV1 = ['a) True & False', 'b) True \u2283 False', 'c) \u223C True', 'd) False \u2228 True', 'e) False \u2261 False', 'f) True & True', 'g) True \u2283 True', 'h) \u223C True', 'i) True \u2228 True', 'j) False \u2261 True', 'k) True & False', 'l) True \u2283 False', 'm) True \u2228 False', 'n) True \u2261 True', 'o) True & False', 'p) True \u2283 False', 'q) False \u2228 False', 'r) True \u2261 False'];
+      var TV2 = ['a) (True \u2228 False) \u2283 (False & True)', 'b) (True \u2261 False) & (False & True)', 'c) (True \u2228 True) \u2283 (False & False)', 'd) (\u223CTrue) \u2283 (True & True)', 'e) (True \u2228 False) \u2228 False'];
+      var GAMES = {
+        TruthValues1: ['Truth values 1 (simple)', PT_HELP, 'PropTruth', TV1],
+        TruthValues2: ['Truth values 2 (compound)', PT_HELP, 'PropTruth', TV2],
+        TruthTable: ['Truth Table', 'Click on the 2nd row connectives to toggle them T F (click on the connectives not on the truth values for the atomic propositions). (Aim to get 100% of these right, in about 10 seconds each. The clock stops 15 seconds while corrections are displayed.)'],
+        MainConnective: ['Main Connective', 'Click once on the main connective. (Aim to get 100% of these right, in about 3 seconds each.)'],
+        Satisfiable: ['Satisfiable', 'Click on the truth value assignment to the propositions (not the connectives), toggling them T F, to make the whole formula True. The default assigns values randomly. There need not be a unique answer. (Aim: 100% right, 10 seconds each. The clock stops 15 seconds while corrections are displayed.)'],
+        Consistent: ['Consistent', 'Click on the truth value assignment to the propositions, toggling them T F, to make all the formulas simultaneously satisfied (ie true). The default assigns them values randomly. There need not be a unique answer. (Aim: 100% right, 45 seconds each. The clock stops while corrections are displayed.)'],
+        Invalid: ['Invalid', 'Click on the truth value assignment to the propositions, toggling them T F, to make all the premises simultaneously true and the conclusion false (thus establishing that the argument is invalid). The default assigns them values randomly. There need not be a unique answer. (Aim: 100% right, 45 seconds each. The clock stops while corrections are displayed.)'],
+        // These three write their own instructions (the widget fills the page), so no help text of ours. Entries: [menu name, our help text, widget game name].
+        ModalTruthTable: ['Modal truth table', '', 'ModalTT'],
+        Branches: ['Branches (trees)', '', 'Branches'],
+        Quiz: ['Quiz', '', 'GamesQuiz']
+      };
+      var game = (/[?&]game=(\w+)/.exec(location.search) || [])[1];
+      if (!GAMES[game]) { try { game = sessionStorage.getItem('deriverGame'); } catch (e) {} }
+      if (!GAMES[game]) game = 'TruthValues1';
+      var G = GAMES[game];
+      var Parameters = { fPropLevel: "true", fAdvancedMenu: "false", fTitle: G[2] || game, fParser: "default" };
+      if (G[3]) Parameters.fInputText = '\n\n' + G[3].join('\n\n');
+      if (G[2] === 'PropTruth') document.documentElement.className = 'truthvalue';
+    </script>
+
+    <div id="container">
+      <div id="chooser"><label>Game: <select id="gameSelect"></select></label></div>
+      <div id="tabbedPanel"> </div>
+      <div id="menu"> </div>
+      <div id="menubuttons"> </div>
+      <div id="tree"> </div>
+      <div id="startButton"></div>
+      <div id="journal"></div>
+      <div id="label"><p id="instructions"></p></div>
+      <div id="worlds"> </div>
+      <div id="input"> </div>
+      <div id="errors"> </div>
+      <div id="buttons"> </div>
+      <div id="access"> </div>
+      <div id="feedback"></div>
+      <div id="buttonsDiv"><div id="trueButtonDiv"> </div></div>
+      <div id="journalDiv"> </div>
+    </div>
+
+    <script type="text/javascript" language="javascript">
+      (function () {
+        // The widget only understands the words True and False under some notations (the production pages use Bergmann);
+        // under any other (e.g. the default one) the answers would be wrong, so those games fall back to Bergmann.
+        // The modal game needs a notation with modal symbols (box, diamond): the user's, if it has them, else girle.
+        if (G[2] === 'ModalTT' && ['default', 'girle', 'howson'].indexOf(Parameters.fParser) < 0) Parameters.fParser = 'girle';
+        if (G[2] === 'PropTruth' && ['bergmann', 'copi', 'gentzen', 'hausman', 'herrick'].indexOf(Parameters.fParser) < 0) Parameters.fParser = 'bergmann';
+        var sel = document.getElementById('gameSelect');
+        Object.keys(GAMES).forEach(function (k) {
+          var o = document.createElement('option'); o.value = k; o.textContent = GAMES[k][0]; o.selected = (k === game); sel.appendChild(o);
+        });
+        // the exercise box (truth-value games) runs to the bottom of the window, like the other tabs' Journals
+        function fit() {
+          var ta = document.querySelector('#journalDiv textarea');
+          if (!ta || G[2] !== 'PropTruth') return;
+          var top = ta.getBoundingClientRect().top + window.pageYOffset;
+          ta.style.setProperty('height', Math.max(140, window.innerHeight - top - 6) + 'px', 'important');
+        }
+        window.addEventListener('resize', fit); setInterval(fit, 500);
+        document.getElementById('instructions').textContent = GAMES[game][1];
+        sel.addEventListener('change', function () {
+          try { sessionStorage.setItem('deriverGame', sel.value); } catch (e) {}
+          location.search = '?game=' + sel.value;
+        });
+      })();
+    </script>
+  </body>
+</html>

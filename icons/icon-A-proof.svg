@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f5fa8"/><stop offset="1" stop-color="#17325f"/></linearGradient></defs><rect x="40" y="40" width="944" height="944" rx="215" fill="url(#g)"/>
+<g transform="translate(118 0)"><rect x="262" y="190" width="40" height="644" fill="#fff"/>
+<g font-family="Times New Roman, Times, serif" font-size="230" fill="#fff">
+<text x="370" y="405">A</text><rect x="370" y="428" width="150" height="20" fill="#fff"/>
+<text x="378" y="640" fill="#ffd36b" font-weight="bold">?</text>
+<text x="370" y="835">B</text></g></g></svg>

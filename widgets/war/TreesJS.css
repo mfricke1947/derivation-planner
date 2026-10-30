@@ -1,0 +1,138 @@
+/** Add css rules here for your application. */
+#container {
+    margin-left: 2em;
+}
+
+#menubuttons {
+/*	background-position: center;
+	border-style: solid;
+	border-width: thin;
+	height: 3em; */
+}
+
+#input .gwt-Button  {
+	padding: 0.5em;
+	margin-left: 0;
+    margin-right: -.3em;
+}
+
+#tree {
+	border-style: solid;
+	border-width: thin;
+}
+
+#tree td {
+    border-style: none !important;
+    
+/*    padding-left: 3em!important;             want to shift right to center text*/
+/*	padding-right: -3em!important;  */
+}
+
+#startButton {
+	padding: 0.5em;
+}
+
+/* 2026 -- the Journal (fTextForJournal, a RichTextArea) renders as a plain <iframe>. Nothing in
+   TreesJS.java sets its height (only setWidth("100%")), and the GWT theme's own .gwt-RichTextArea
+   rule exists but is empty, so it was falling back to the browser's unstyled default iframe size
+   (150px tall). Doubling that here; tune the px value directly if a different depth is wanted. */
+#journal .gwt-RichTextArea {
+	height: 300px;
+}
+
+/*
+.gwt-Button { font-family: Verdana,Arial,sans-serif; font-size: 1em;
+				display: inline-block; position: relative; padding: 0; margin-right: .1em; 
+				text-decoration: none !important; cursor: pointer; text-align: center; zoom: 1; 
+				overflow: visible; } /* the overflow property removes extra width in IE 
+
+*/
+/*button sets*/
+.menubuttons, .buttons { margin-right: 7px; }
+.menubuttons .gwt-Button, .buttons .gwt-Button  
+{ margin-left: 0; margin-right: -.3em; }
+
+/* workarounds */
+button.gwt-Button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra padding in Firefox */
+
+
+
+/*!
+ * jQuery UI Button 1.8.20
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Button#theming
+ */
+.ui-button { display: inline-block; position: relative; padding: 0; margin-right: .1em; text-decoration: none !important; cursor: pointer; text-align: center; zoom: 1; overflow: visible; } /* the overflow property removes extra width in IE */
+.ui-button-icon-only { width: 2.2em; } /* to make room for the icon, a width needs to be set here */
+button.ui-button-icon-only { width: 2.4em; } /* button elements seem to need a little more width */
+.ui-button-icons-only { width: 3.4em; } 
+button.ui-button-icons-only { width: 3.7em; } 
+
+/*button text element */
+.ui-button .ui-button-text { display: block; line-height: 1.4;  }
+.ui-button-text-only .ui-button-text { padding: .4em 1em; }
+.ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text { padding: .4em; text-indent: -9999999px; }
+.ui-button-text-icon-primary .ui-button-text, .ui-button-text-icons .ui-button-text { padding: .4em 1em .4em 2.1em; }
+.ui-button-text-icon-secondary .ui-button-text, .ui-button-text-icons .ui-button-text { padding: .4em 2.1em .4em 1em; }
+.ui-button-text-icons .ui-button-text { padding-left: 2.1em; padding-right: 2.1em; }
+/* no icon support for input elements, provide padding by default */
+input.ui-button { padding: .4em 1em; }
+
+/*button icon element(s) */
+.ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon { position: absolute; top: 50%; margin-top: -8px; }
+.ui-button-icon-only .ui-icon { left: 50%; margin-left: -8px; }
+.ui-button-text-icon-primary .ui-button-icon-primary, .ui-button-text-icons .ui-button-icon-primary, .ui-button-icons-only .ui-button-icon-primary { left: .5em; }
+.ui-button-text-icon-secondary .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary { right: .5em; }
+.ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary { right: .5em; }
+
+
+
+
+
+/*this override worked, but only for odd numbered lines! 
+
+td.GPBYFDEAD {
+	border-color: black !important;
+    border-style: double !important;
+}
+  */
+
+
+
+
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}

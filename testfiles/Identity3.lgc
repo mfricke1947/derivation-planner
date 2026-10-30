@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_492-internal" class="java.beans.XMLDecoder">
+ <int>3</int>
+ <string>&lt;html&gt;
+  &lt;head&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+      &lt;!--
+        body { font-size: 16pt }
+      --&gt;
+    &lt;/style&gt;
+    
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p style=&quot;margin-top: 0&quot;&gt;
+      F &amp;#8756; F &amp;amp; G
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</string>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="us.softoption.interpretation.TProperty" id="TProperty0">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TProperty0"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TProperty0"/>
+      <char>A</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>228</int>
+    </void>
+    <void property="YCoord">
+     <int>96</int>
+    </void>
+    <void id="Rectangle0" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle0"/>
+       <int>100</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle0"/>
+       <int>100</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle0"/>
+    </void>
+    <void property="color">
+     <object class="java.awt.Color">
+      <int>255</int>
+      <int>0</int>
+      <int>0</int>
+      <int>255</int>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual" id="TIndividual0">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TIndividual0"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TIndividual0"/>
+      <char>n</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>448</int>
+    </void>
+    <void property="YCoord">
+     <int>92</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual" id="TIndividual1">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TIndividual1"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TIndividual1"/>
+      <char>a</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>81</int>
+    </void>
+    <void property="YCoord">
+     <int>80</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual" id="TIndividual2">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TIndividual2"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TIndividual2"/>
+      <char>b</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>242</int>
+    </void>
+    <void property="YCoord">
+     <int>113</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIndividual" id="TIndividual3">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TIndividual3"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TIndividual3"/>
+      <char>c</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>391</int>
+    </void>
+    <void property="YCoord">
+     <int>77</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TInterpretationBoard" id="TInterpretationBoard0">
+    <void id="Rectangle1" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle1"/>
+       <int>155</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle1"/>
+       <int>90</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle1"/>
+    </void>
+    <void property="semantics">
+     <object class="us.softoption.interpretation.TSemantics" id="TSemantics0">
+      <void class="us.softoption.interpretation.TSemantics" method="getField">
+       <string>fCurrentPropositions</string>
+       <void method="set">
+        <object idref="TSemantics0"/>
+        <array class="boolean" length="26"/>
+       </void>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TFunction" id="TFunction0">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TFunction0"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TFunction0"/>
+      <char>g</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>249</int>
+    </void>
+    <void property="YCoord">
+     <int>84</int>
+    </void>
+    <void id="Rectangle2" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle2"/>
+       <int>149</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle2"/>
+       <int>36</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle2"/>
+    </void>
+    <void id="Point0" property="from">
+     <void class="java.awt.Point" method="getField">
+      <string>x</string>
+      <void method="set">
+       <object idref="Point0"/>
+       <int>398</int>
+      </void>
+     </void>
+     <void class="java.awt.Point" method="getField">
+      <string>y</string>
+      <void method="set">
+       <object idref="Point0"/>
+       <int>84</int>
+      </void>
+     </void>
+    </void>
+    <void id="Point1" property="to">
+     <void class="java.awt.Point" method="getField">
+      <string>x</string>
+      <void method="set">
+       <object idref="Point1"/>
+       <int>249</int>
+      </void>
+     </void>
+     <void class="java.awt.Point" method="getField">
+      <string>y</string>
+      <void method="set">
+       <object idref="Point1"/>
+       <int>120</int>
+      </void>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TIdentity" id="TIdentity0">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TIdentity0"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TIdentity0"/>
+      <char>q</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>88</int>
+    </void>
+    <void property="YCoord">
+     <int>87</int>
+    </void>
+    <void id="Rectangle3" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle3"/>
+       <int>0</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle3"/>
+       <int>0</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle3"/>
+    </void>
+    <void id="Point2" property="from">
+     <void class="java.awt.Point" method="getField">
+      <string>x</string>
+      <void method="set">
+       <object idref="Point2"/>
+       <int>88</int>
+      </void>
+     </void>
+     <void class="java.awt.Point" method="getField">
+      <string>y</string>
+      <void method="set">
+       <object idref="Point2"/>
+       <int>87</int>
+      </void>
+     </void>
+    </void>
+    <void id="Point3" property="to">
+     <void class="java.awt.Point" method="getField">
+      <string>x</string>
+      <void method="set">
+       <object idref="Point3"/>
+       <int>88</int>
+      </void>
+     </void>
+     <void class="java.awt.Point" method="getField">
+      <string>y</string>
+      <void method="set">
+       <object idref="Point3"/>
+       <int>87</int>
+      </void>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="us.softoption.interpretation.TRelation" id="TRelation0">
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fSelected</string>
+     <void method="set">
+      <object idref="TRelation0"/>
+      <boolean>false</boolean>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TShape" method="getField">
+     <string>fName</string>
+     <void method="set">
+      <object idref="TRelation0"/>
+      <char>R</char>
+     </void>
+    </void>
+    <void property="XCoord">
+     <int>88</int>
+    </void>
+    <void property="YCoord">
+     <int>84</int>
+    </void>
+    <void id="Rectangle4" property="boundsRect">
+     <void class="java.awt.Rectangle" method="getField">
+      <string>width</string>
+      <void method="set">
+       <object idref="Rectangle4"/>
+       <int>310</int>
+      </void>
+     </void>
+     <void class="java.awt.Rectangle" method="getField">
+      <string>height</string>
+      <void method="set">
+       <object idref="Rectangle4"/>
+       <int>3</int>
+      </void>
+     </void>
+    </void>
+    <void property="boundsRect">
+     <object idref="Rectangle4"/>
+    </void>
+    <void id="Point4" property="from">
+     <void class="java.awt.Point" method="getField">
+      <string>x</string>
+      <void method="set">
+       <object idref="Point4"/>
+       <int>88</int>
+      </void>
+     </void>
+     <void class="java.awt.Point" method="getField">
+      <string>y</string>
+      <void method="set">
+       <object idref="Point4"/>
+       <int>87</int>
+      </void>
+     </void>
+    </void>
+    <void id="Point5" property="to">
+     <void class="java.awt.Point" method="getField">
+      <string>x</string>
+      <void method="set">
+       <object idref="Point5"/>
+       <int>398</int>
+      </void>
+     </void>
+     <void class="java.awt.Point" method="getField">
+      <string>y</string>
+      <void method="set">
+       <object idref="Point5"/>
+       <int>84</int>
+      </void>
+     </void>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="us.softoption.proofs.TProofTableModel"/>
+ <object class="us.softoption.tree.TTreeTableModel" id="TTreeTableModel0">
+  <void id="DefaultMutableTreeNode0" property="hostRoot">
+   <void id="TTreeDataNode0" property="userObject">
+    <void class="us.softoption.interpretation.TTestNode" method="getField">
+     <string>fParser</string>
+     <void method="set">
+      <object idref="TTreeDataNode0"/>
+      <object class="us.softoption.parser.TBergmannParser" id="TBergmannParser0"/>
+     </void>
+    </void>
+    <void class="us.softoption.interpretation.TTestNode" method="getField">
+     <string>fTreeNode</string>
+     <void method="set">
+      <object idref="TTreeDataNode0"/>
+      <object idref="DefaultMutableTreeNode0"/>
+     </void>
+    </void>
+    <void property="justification">
+     <string>SM</string>
+    </void>
+    <void property="lineno">
+     <int>1</int>
+    </void>
+   </void>
+   <void method="add">
+    <object class="javax.swing.tree.DefaultMutableTreeNode" id="DefaultMutableTreeNode1">
+     <void property="userObject">
+      <object class="us.softoption.tree.TTreeDataNode" id="TTreeDataNode1">
+       <void class="us.softoption.interpretation.TTestNode" method="getField">
+        <string>fParser</string>
+        <void method="set">
+         <object idref="TTreeDataNode1"/>
+         <object idref="TBergmannParser0"/>
+        </void>
+       </void>
+       <void class="us.softoption.interpretation.TTestNode" method="getField">
+        <string>fDead</string>
+        <void method="set">
+         <object idref="TTreeDataNode1"/>
+         <boolean>true</boolean>
+        </void>
+       </void>
+       <void class="us.softoption.interpretation.TTestNode" method="getField">
+        <string>fTreeNode</string>
+        <void method="set">
+         <object idref="TTreeDataNode1"/>
+         <object idref="DefaultMutableTreeNode1"/>
+        </void>
+       </void>
+       <void property="justification">
+        <string>SM</string>
+       </void>
+       <void property="lineno">
+        <int>2</int>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="javax.swing.tree.DefaultMutableTreeNode">
+       <void property="userObject">
+        <string>LeftDiag</string>
+       </void>
+       <void method="add">
+        <object class="javax.swing.tree.DefaultMutableTreeNode" id="DefaultMutableTreeNode2">
+         <void property="userObject">
+          <object class="us.softoption.tree.TTreeDataNode" id="TTreeDataNode2">
+           <void class="us.softoption.interpretation.TTestNode" method="getField">
+            <string>fParser</string>
+            <void method="set">
+             <object idref="TTreeDataNode2"/>
+             <object idref="TBergmannParser0"/>
+            </void>
+           </void>
+           <void class="us.softoption.interpretation.TTestNode" method="getField">
+            <string>fTreeNode</string>
+            <void method="set">
+             <object idref="TTreeDataNode2"/>
+             <object idref="DefaultMutableTreeNode2"/>
+            </void>
+           </void>
+           <void property="firstJustno">
+            <int>2</int>
+           </void>
+           <void property="justification">
+            <string> ∼&amp;D</string>
+           </void>
+           <void property="lineno">
+            <int>3</int>
+           </void>
+          </object>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="javax.swing.tree.DefaultMutableTreeNode">
+       <void property="userObject">
+        <string>RightDiag</string>
+       </void>
+       <void method="add">
+        <object class="javax.swing.tree.DefaultMutableTreeNode" id="DefaultMutableTreeNode3">
+         <void property="userObject">
+          <object class="us.softoption.tree.TTreeDataNode" id="TTreeDataNode3">
+           <void class="us.softoption.interpretation.TTestNode" method="getField">
+            <string>fParser</string>
+            <void method="set">
+             <object idref="TTreeDataNode3"/>
+             <object idref="TBergmannParser0"/>
+            </void>
+           </void>
+           <void class="us.softoption.interpretation.TTestNode" method="getField">
+            <string>fTreeNode</string>
+            <void method="set">
+             <object idref="TTreeDataNode3"/>
+             <object idref="DefaultMutableTreeNode3"/>
+            </void>
+           </void>
+           <void property="firstJustno">
+            <int>2</int>
+           </void>
+           <void property="justification">
+            <string> ∼&amp;D</string>
+           </void>
+           <void property="lineno">
+            <int>3</int>
+           </void>
+          </object>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="root">
+   <object idref="TTreeDataNode0"/>
+  </void>
+ </object>
+ <object class="us.softoption.editor.TDocState">
+  <void property="HDivider">
+   <int>48</int>
+  </void>
+  <void property="VDivider">
+   <int>250</int>
+  </void>
+  <void property="tabIndex">
+   <int>2</int>
+  </void>
+ </object>
+<void class="us.softoption.interpretation.TTestNode" id="Field0" method="getField">
+ <string>fAntecedents</string>
+ <void id="ArrayList0" method="get">
+  <object idref="TTreeDataNode1"/>
+  <void method="add">
+   <object class="us.softoption.parser.TFormula" id="TFormula0">
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fKind</string>
+     <void method="set">
+      <object idref="TFormula0"/>
+      <short>7</short>
+     </void>
+    </void>
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fInfo</string>
+     <void method="set">
+      <object idref="TFormula0"/>
+      <string>∼</string>
+     </void>
+    </void>
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fRLink</string>
+     <void method="set">
+      <object idref="TFormula0"/>
+      <object class="us.softoption.parser.TFormula" id="TFormula1">
+       <void class="us.softoption.parser.TFormula" method="getField">
+        <string>fKind</string>
+        <void method="set">
+         <object idref="TFormula1"/>
+         <short>1</short>
+        </void>
+       </void>
+       <void class="us.softoption.parser.TFormula" method="getField">
+        <string>fInfo</string>
+        <void method="set">
+         <object idref="TFormula1"/>
+         <string>∧</string>
+        </void>
+       </void>
+       <void class="us.softoption.parser.TFormula" method="getField">
+        <string>fLLink</string>
+        <void method="set">
+         <object idref="TFormula1"/>
+         <object class="us.softoption.parser.TFormula" id="TFormula2">
+          <void class="us.softoption.parser.TFormula" method="getField">
+           <string>fKind</string>
+           <void method="set">
+            <object idref="TFormula2"/>
+            <short>5</short>
+           </void>
+          </void>
+          <void class="us.softoption.parser.TFormula" method="getField">
+           <string>fInfo</string>
+           <void method="set">
+            <object idref="TFormula2"/>
+            <string>F</string>
+           </void>
+          </void>
+         </object>
+        </void>
+       </void>
+       <void class="us.softoption.parser.TFormula" method="getField">
+        <string>fRLink</string>
+        <void method="set">
+         <object idref="TFormula1"/>
+         <object class="us.softoption.parser.TFormula" id="TFormula3">
+          <void class="us.softoption.parser.TFormula" method="getField">
+           <string>fKind</string>
+           <void method="set">
+            <object idref="TFormula3"/>
+            <short>5</short>
+           </void>
+          </void>
+          <void class="us.softoption.parser.TFormula" method="getField">
+           <string>fInfo</string>
+           <void method="set">
+            <object idref="TFormula3"/>
+            <string>G</string>
+           </void>
+          </void>
+         </object>
+        </void>
+       </void>
+      </object>
+     </void>
+    </void>
+   </object>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList0"/>
+<void class="us.softoption.parser.TFormula" method="getField">
+ <string>fKind</string>
+ <void method="set">
+  <object class="us.softoption.parser.TFormula" id="TFormula4">
+   <void class="us.softoption.parser.TFormula" method="getField">
+    <string>fInfo</string>
+    <void method="set">
+     <object idref="TFormula4"/>
+     <string>G</string>
+    </void>
+   </void>
+  </object>
+  <short>5</short>
+ </void>
+</void>
+<void class="us.softoption.parser.TFormula" method="getField">
+ <string>fKind</string>
+ <void method="set">
+  <object class="us.softoption.parser.TFormula" id="TFormula5">
+   <void class="us.softoption.parser.TFormula" method="getField">
+    <string>fInfo</string>
+    <void method="set">
+     <object idref="TFormula5"/>
+     <string>F</string>
+    </void>
+   </void>
+  </object>
+  <short>5</short>
+ </void>
+</void>
+<void class="us.softoption.interpretation.TTestNode" id="Field1" method="getField">
+ <string>fAntecedents</string>
+ <void id="ArrayList1" method="get">
+  <object idref="TTreeDataNode3"/>
+  <void method="add">
+   <object class="us.softoption.parser.TFormula" id="TFormula6">
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fKind</string>
+     <void method="set">
+      <object idref="TFormula6"/>
+      <short>7</short>
+     </void>
+    </void>
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fInfo</string>
+     <void method="set">
+      <object idref="TFormula6"/>
+      <string>∼</string>
+     </void>
+    </void>
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fRLink</string>
+     <void method="set">
+      <object idref="TFormula6"/>
+      <object idref="TFormula4"/>
+     </void>
+    </void>
+   </object>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList1"/>
+<void class="us.softoption.interpretation.TTestNode" id="Field2" method="getField">
+ <string>fAntecedents</string>
+ <void id="ArrayList2" method="get">
+  <object idref="TTreeDataNode0"/>
+  <void method="add">
+   <object class="us.softoption.parser.TFormula" id="TFormula7">
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fKind</string>
+     <void method="set">
+      <object idref="TFormula7"/>
+      <short>5</short>
+     </void>
+    </void>
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fInfo</string>
+     <void method="set">
+      <object idref="TFormula7"/>
+      <string>F</string>
+     </void>
+    </void>
+   </object>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList2"/>
+<void class="us.softoption.interpretation.TTestNode" id="Field3" method="getField">
+ <string>fAntecedents</string>
+ <void id="ArrayList3" method="get">
+  <object idref="TTreeDataNode2"/>
+  <void method="add">
+   <object class="us.softoption.parser.TFormula" id="TFormula8">
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fKind</string>
+     <void method="set">
+      <object idref="TFormula8"/>
+      <short>7</short>
+     </void>
+    </void>
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fInfo</string>
+     <void method="set">
+      <object idref="TFormula8"/>
+      <string>∼</string>
+     </void>
+    </void>
+    <void class="us.softoption.parser.TFormula" method="getField">
+     <string>fRLink</string>
+     <void method="set">
+      <object idref="TFormula8"/>
+      <object idref="TFormula5"/>
+     </void>
+    </void>
+   </object>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList3"/>
+</java>

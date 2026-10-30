@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f5fa8"/><stop offset="1" stop-color="#17325f"/></linearGradient></defs><rect x="40" y="40" width="944" height="944" rx="215" fill="url(#g)"/>
+<g transform="translate(92 0)"><rect x="250" y="190" width="44" height="644" fill="#fff"/>
+<g font-family="Times New Roman, Times, serif" fill="#fff">
+<text x="360" y="580" font-size="470" fill="#ffd36b" font-weight="bold">?</text>
+<text x="372" y="840" font-size="250">B</text></g></g></svg>
