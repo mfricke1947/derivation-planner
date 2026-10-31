@@ -58,3 +58,4 @@ the checkers for drawings were written ad hoc earlier and are not saved.
 - `e2e-pages.js` — converted exercise pages (tools/pages-to-journal.js): both content kinds, Journal contents, notation notice, Start from selection, Save keeps the notation record (PARSER= env).
 - `pages-to-journal.js` — the converter tool's folder handling, skips, ordering, --force (plain node).
 - `seed.js` — shared helper: every test gets a throwaway settings folder with all four tabs on (so tests do not depend on the per-notation table or the user's settings; e2e-tabs is the exception).
+- `e2e-network.js` — privacy check: starts every tab (incl. Games) and fails if Chromium requests anything from outside this computer. Passes (2026-10-31): the Google-CDN jQuery tag in the svg-edit pages is inside an HTML comment (inactive), the local `jquery.js` is used.

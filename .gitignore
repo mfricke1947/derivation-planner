@@ -24,3 +24,6 @@ oldCerts/
 *.key
 *.certSigningRequest
 *.mobileprovision
+
+# working drafts, not part of the project
+SignPath-application-draft.md

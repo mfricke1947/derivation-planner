@@ -16,7 +16,7 @@ which keeps its own licence. Where a component is offered under more than one li
 | **jQuery hotkeys** | `…/js-hotkeys` | MIT or GPL v2 (dual), © 2010 John Resig; used under MIT | |
 | **jQuery contextMenu** | `…/contextmenu` | MIT or GPL (dual), © A Beautiful Site, LLC; used under MIT | |
 | **jQuery BBQ** | `…/jquerybbq` | MIT or GPL (dual), © 2010 "Cowboy" Ben Alman; used under MIT | |
-| **JQuerySpinBtn** | `…/spinbtn` | no licence statement in the file | Originally by George Adamson and Mark Gibson; distributed with SVG-edit. *To be confirmed by the maintainer.* |
+| **JQuerySpinBtn** | `…/spinbtn` | no licence statement in the file | Used for the number boxes (stroke width, angle, font size, opacity…) in the drawing editor. Originally by George Adamson (2006); modified by Mark Gibson, Jeff Schiller, Alexis Deveria (SVG-edit authors), Benjamin Thomas and Brett Zamir; distributed with SVG-edit. The file carries no separate licence statement. *To be confirmed by the maintainer.* |
 | **JScheme** | inside the Symbolize widget (`vendor/symbolize13`, source package `jscheme`) | Peter Norvig's software licence, http://www.norvig.com/license.html | Permits use, modification and redistribution with no warranty; the origin must not be misrepresented and altered versions must be plainly marked as such. © 1998-2002 Peter Norvig. |
 
 ## MIT licence text (applies to the MIT-licensed components above, each with its own copyright holder)
