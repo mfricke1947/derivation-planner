@@ -9,7 +9,7 @@ the familiar `.lgc` files of the Java-era Deriver and also plain HTML pages.
 and Windows. Source and release files are also here on GitHub (Releases).
 
 Author: Martin Frické — mfricke@arizona.edu. Licence: MIT (see `LICENSE`; third-party components in `THIRD-PARTY-NOTICES.md`).
-How the Windows installer is signed, and who approves it: [Code signing policy](CODE_SIGNING_POLICY.md).
+How the installers are signed and how to verify them: [Releases and verification](RELEASES-AND-VERIFICATION.md).
 
 ## How it is built
 The logic widgets are written in Java and compiled to JavaScript with GWT (a separate project); this repository holds the **Electron**
