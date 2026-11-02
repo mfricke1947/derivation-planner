@@ -45,3 +45,62 @@ jobs:
           gh release view "${{ github.ref_name }}" 2>$null
           if ($LASTEXITCODE -ne 0) { gh release create "${{ github.ref_name }}" --title "Derivation Planner ${{ github.ref_name }}" --generate-notes }
           Get-ChildItem dist -Filter *.exe | ForEach-Object { gh release upload "${{ github.ref_name }}" $_.FullName --clobber }
+
+  # The Microsoft Store package. The Store re-signs it, so it is built UNSIGNED, with the identity reserved in Partner Center
+  # (package.json "build.appx"). The job checks the manifest against that identity, then tries a sideload install on the runner.
+  store-package:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Stage the compiled widgets
+        run: node tools/stage-war.js
+      - name: Build the Store package
+        run: npx electron-builder --win appx --publish never
+      - name: Check the package manifest against the reserved Store identity
+        shell: pwsh
+        run: |
+          $pkg = Get-ChildItem dist -Filter *.appx | Select-Object -First 1
+          if (-not $pkg) { throw 'no .appx was built' }
+          Write-Host "Package: $($pkg.Name) ($([math]::Round($pkg.Length/1MB,1)) MB)"
+          Copy-Item $pkg.FullName "$env:RUNNER_TEMP\pkg.zip"
+          Expand-Archive "$env:RUNNER_TEMP\pkg.zip" "$env:RUNNER_TEMP\pkg" -Force
+          [xml]$m = Get-Content "$env:RUNNER_TEMP\pkg\AppxManifest.xml"
+          $id = $m.Package.Identity
+          Write-Host "Identity Name=$($id.Name) Publisher=$($id.Publisher) Version=$($id.Version) Arch=$($id.ProcessorArchitecture)"
+          Write-Host "PublisherDisplayName=$($m.Package.Properties.PublisherDisplayName) DisplayName=$($m.Package.Properties.DisplayName)"
+          Write-Host "Executable=$($m.Package.Applications.Application.Executable)"
+          $ext = $m.OuterXml
+          Write-Host ("File type association for .lgc present: " + ($ext -match '\.lgc'))
+          if ($id.Name -ne 'SoftOption.Us.DerivationPlanner') { throw "unexpected identity name $($id.Name)" }
+          if ($id.Publisher -ne 'CN=E585C814-79A9-45B5-96EB-0C5308ADE66C') { throw "unexpected publisher $($id.Publisher)" }
+          if ($m.Package.Properties.PublisherDisplayName -ne 'SoftOption.Us') { throw 'unexpected publisher display name' }
+          if ($id.Version -notmatch '^\d+\.\d+\.\d+\.0$') { throw "Store packages need a 4th version part of 0: $($id.Version)" }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: store-package
+          path: dist/*.appx
+      - name: Sideload smoke test (self-signed copy; informational, does not fail the job)
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $pkg = Get-ChildItem dist -Filter *.appx | Select-Object -First 1
+          $cert = New-SelfSignedCertificate -Type Custom -Subject 'CN=E585C814-79A9-45B5-96EB-0C5308ADE66C' -KeyUsage DigitalSignature -FriendlyName 'DP test' -CertStoreLocation 'Cert:\CurrentUser\My' -TextExtension @('2.5.29.37={text}1.3.6.1.5.5.7.3.3', '2.5.29.19={text}')
+          $cer = "$env:RUNNER_TEMP\dptest.cer"; Export-Certificate -Cert $cert -FilePath $cer | Out-Null
+          Import-Certificate -FilePath $cer -CertStoreLocation 'Cert:\LocalMachine\TrustedPeople' | Out-Null
+          $signtool = Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10\bin' -Recurse -Filter signtool.exe | Where-Object { $_.FullName -match '\\x64\\' } | Sort-Object FullName | Select-Object -Last 1
+          $test = "$env:RUNNER_TEMP\test.appx"; Copy-Item $pkg.FullName $test
+          & $signtool.FullName sign /fd SHA256 /sha1 $cert.Thumbprint $test
+          Add-AppxPackage -Path $test
+          $p = Get-AppxPackage SoftOption.Us.DerivationPlanner
+          Write-Host "Installed: $($p.PackageFullName) at $($p.InstallLocation)"
+          Get-ChildItem $p.InstallLocation | Select-Object -First 20 | ForEach-Object { Write-Host $_.Name }
+          $exe = Get-ChildItem $p.InstallLocation -Recurse -Filter 'Derivation Planner.exe' | Select-Object -First 1
+          $env:DERIVER_SMOKE_OUT = "$PWD\smoke-store.json"
+          $proc = Start-Process -FilePath $exe.FullName -ArgumentList '--user-data-dir=C:\dp-store-ud' -PassThru -Wait
+          if (Test-Path smoke-store.json) { Get-Content smoke-store.json } else { Write-Host 'no smoke report written' }
+          if ($proc.ExitCode -ne 0) { throw "smoke test failed (exit code $($proc.ExitCode))" }

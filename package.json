@@ -46,7 +46,8 @@
       }
     ],
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "buildres"
     },
     "mac": {
       "category": "public.app-category.education",
@@ -89,7 +90,19 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true
     },
-    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "appx": {
+      "identityName": "SoftOption.Us.DerivationPlanner",
+      "publisher": "CN=E585C814-79A9-45B5-96EB-0C5308ADE66C",
+      "publisherDisplayName": "SoftOption.Us",
+      "displayName": "Derivation Planner",
+      "applicationId": "DerivationPlanner",
+      "languages": [
+        "en-US"
+      ],
+      "backgroundColor": "#17325f",
+      "showNameOnTiles": false
+    }
   },
   "license": "MIT",
   "repository": {
