@@ -5,8 +5,13 @@ models and reading off what is true in them), English-to-logic **symbolization**
 textbook notations (Bergmann, Copi, Gentzen, Hausman, Herrick, Howson, Barwise, Girle, Stegeman and a default). Documents are
 the familiar `.lgc` files of the Java-era Deriver and also plain HTML pages.
 
-**Download and documentation:** https://softoption.us/node/887 — installers for macOS (Apple silicon and Intel, signed and notarized)
-and Windows. Source and release files are also here on GitHub (Releases).
+**Download and documentation:** https://softoption.us/node/887
+
+* **Windows:** get it from the **[Microsoft Store](https://apps.microsoft.com/detail/9n3cfwbp80nz)** (recommended: signed by Microsoft, no security warnings, updates automatically).
+  A direct installer is also on the [Releases](https://github.com/mfricke1947/derivation-planner/releases) page (unsigned, so Windows SmartScreen may ask you to confirm).
+* **macOS** (Apple silicon and Intel): the signed and notarized disk image, from the download page or the Releases page.
+
+Source code and release files are here on GitHub.
 
 Author: Martin Frické — mfricke@arizona.edu. Licence: MIT (see `LICENSE`; third-party components in `THIRD-PARTY-NOTICES.md`).
 How the installers are signed and how to verify them: [Releases and verification](RELEASES-AND-VERIFICATION.md).

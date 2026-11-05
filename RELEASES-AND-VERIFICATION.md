@@ -6,13 +6,16 @@ How Derivation Planner's installers are made, signed and checked.
 The macOS installer (`.dmg`) is signed with an Apple Developer ID and **notarized by Apple**, so it opens normally on Apple-silicon and Intel Macs.
 
 ## Windows
-The Windows installer is built from the source in this repository by **GitHub Actions** (`.github/workflows/build.yml`) on GitHub-hosted runners. Each build installs the
-result silently on a clean Windows machine, starts the program and checks that every part loads (a smoke test) before the installer is published.
+**Microsoft Store (recommended).** Derivation Planner is published in the [Microsoft Store](https://apps.microsoft.com/detail/9n3cfwbp80nz). Store packages are signed by Microsoft
+after certification, so Windows shows no security warning, and updates are delivered by the Store. The Store package is built from the source in this repository by
+**GitHub Actions** (`.github/workflows/build.yml`), checked against the identity reserved in Microsoft Partner Center, and test-installed and started on a clean Windows machine
+before it is submitted.
 
-The Windows installer is **not currently signed with a code-signing certificate**. Such certificates cost money and, for free open-source programs, depend on an
-established public track record; an application to a free signing programme was not successful at this stage. As a result Windows SmartScreen may show
-"Windows protected your PC" the first time you run the installer. This is normal for new unsigned software. To continue, choose **More info**, then **Run anyway**.
-Signing will be revisited as the project becomes better known.
+**Direct installer (alternative).** The direct installer on the [Releases](https://github.com/mfricke1947/derivation-planner/releases) page is built by the same workflow, and each build
+installs it silently on a clean Windows machine, starts the program and checks that every part loads before it is published. It is **not signed with a code-signing certificate**:
+such certificates cost money and, for free open-source programs, depend on an established public track record. As a result Windows SmartScreen may show
+"Windows protected your PC" the first time you run it. This is normal for unsigned software. To continue, choose **More info**, then **Run anyway**. If you would rather not see
+the warning, use the Microsoft Store version.
 
 ## How to check an installer is genuine
 * Download only from the project's download page (https://softoption.us/node/887) or from this repository's
